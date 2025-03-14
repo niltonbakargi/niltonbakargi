@@ -13,7 +13,7 @@ Regularização fundiária e topografia
 Desenvolvimento de soluções tecnológicas para identificação de espécies, controle de despesas e gestão ambiental
 Projetos que integrem tecnologia e meio ambiente para um impacto positivo na sociedade
 📫 How to reach me:
-E-mail: niltonbakargi@gmail.com
+E-mail: nilton.bakargi@ufms.br
 LinkedIn: linkedin.com/in/niltonbakargi
 😄 Pronouns:He/Him
 ⚡ Fun fact:Sou engenheiro florestal, capoeirista e disléxico. Apesar das dificuldades com palavras, minha paixão por aprender e compartilhar conhecimento não conhece limites!
