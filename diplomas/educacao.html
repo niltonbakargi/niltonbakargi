@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Diplomas — Educação | Nilton Dobes Bakargi</title>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: 'Montserrat', sans-serif;
+      background: #ffffff;
+      color: #1a1a1a;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 40px 20px;
+    }
+
+    .volta {
+      font-size: 0.75rem;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: #aaa;
+      text-decoration: none;
+      margin-bottom: 32px;
+      transition: color 0.2s;
+    }
+
+    .volta:hover { color: #2c5f2e; }
+
+    h1 {
+      font-size: clamp(1.8rem, 5vw, 3rem);
+      font-weight: 700;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: #1a1a1a;
+      margin-bottom: 8px;
+      text-align: center;
+    }
+
+    .subtitulo {
+      font-size: 0.78rem;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: #aaa;
+      margin-bottom: 48px;
+      text-align: center;
+    }
+
+    .lista {
+      width: 100%;
+      max-width: 720px;
+      display: flex;
+      flex-direction: column;
+      gap: 40px;
+    }
+
+    .diploma-card {
+      border: 1px solid #e8e8e8;
+      border-radius: 4px;
+      overflow: hidden;
+    }
+
+    .diploma-info {
+      padding: 20px 24px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .diploma-info-texto {}
+
+    .diploma-nivel {
+      font-size: 0.68rem;
+      font-weight: 600;
+      letter-spacing: 2.5px;
+      text-transform: uppercase;
+      color: #2c5f2e;
+      margin-bottom: 6px;
+    }
+
+    .diploma-titulo {
+      font-size: 0.95rem;
+      font-weight: 600;
+      color: #1a1a1a;
+      margin-bottom: 4px;
+    }
+
+    .diploma-inst {
+      font-size: 0.8rem;
+      font-weight: 300;
+      color: #999;
+    }
+
+    .diploma-abrir {
+      font-size: 0.7rem;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: #aaa;
+      text-decoration: none;
+      white-space: nowrap;
+      transition: color 0.2s;
+      flex-shrink: 0;
+    }
+
+    .diploma-abrir:hover { color: #2c5f2e; }
+
+    .diploma-pdf {
+      width: 100%;
+      height: 500px;
+      border: none;
+      background: #f7f7f7;
+      display: block;
+    }
+  </style>
+</head>
+<body>
+
+  <a href="../index.html" class="volta">&#8592; Voltar</a>
+
+  <h1>Diplomas</h1>
+  <p class="subtitulo">Educa&ccedil;&atilde;o</p>
+
+  <div class="lista">
+
+    <div class="diploma-card">
+      <div class="diploma-info">
+        <div class="diploma-info-texto">
+          <div class="diploma-nivel">Gradua&ccedil;&atilde;o</div>
+          <div class="diploma-titulo">Educa&ccedil;&atilde;o F&iacute;sica</div>
+          <div class="diploma-inst">UFMS &mdash; Universidade Federal de Mato Grosso do Sul</div>
+        </div>
+        <a class="diploma-abrir" href="Diploma Educação Físisca UFMS Nilton Dobes Bakargi.pdf" target="_blank">Abrir PDF &#8599;</a>
+      </div>
+      <iframe class="diploma-pdf" src="Diploma Educação Físisca UFMS Nilton Dobes Bakargi.pdf"></iframe>
+    </div>
+
+    <div class="diploma-card">
+      <div class="diploma-info">
+        <div class="diploma-info-texto">
+          <div class="diploma-nivel">P&oacute;s-Gradua&ccedil;&atilde;o</div>
+          <div class="diploma-titulo">Gest&atilde;o Escolar e Coordena&ccedil;&atilde;o</div>
+          <div class="diploma-inst"></div>
+        </div>
+        <a class="diploma-abrir" href="Diploma gestão pedagógica  Nilton Dobes Bakargi.pdf" target="_blank">Abrir PDF &#8599;</a>
+      </div>
+      <iframe class="diploma-pdf" src="Diploma gestão pedagógica  Nilton Dobes Bakargi.pdf"></iframe>
+    </div>
+
+  </div>
+
+</body>
+</html>

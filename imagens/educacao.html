@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Imagens — Educação | Nilton Dobes Bakargi</title>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: 'Montserrat', sans-serif;
+      background: #ffffff;
+      color: #1a1a1a;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 40px 20px;
+    }
+
+    .volta {
+      font-size: 0.75rem;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: #aaa;
+      text-decoration: none;
+      margin-bottom: 32px;
+      align-self: flex-start;
+      transition: color 0.2s;
+    }
+
+    .volta:hover { color: #2c5f2e; }
+
+    h1 {
+      font-size: clamp(1.8rem, 5vw, 3rem);
+      font-weight: 700;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: #1a1a1a;
+      margin-bottom: 8px;
+      text-align: center;
+    }
+
+    .subtitulo {
+      font-size: 0.78rem;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: #aaa;
+      margin-bottom: 48px;
+      text-align: center;
+    }
+
+    .galeria {
+      width: 100%;
+      max-width: 960px;
+      columns: 3 220px;
+      gap: 12px;
+    }
+
+    .galeria a {
+      display: block;
+      break-inside: avoid;
+      margin-bottom: 12px;
+      overflow: hidden;
+      border-radius: 3px;
+      background: #f7f7f7;
+    }
+
+    .galeria img {
+      width: 100%;
+      display: block;
+      transition: transform 0.3s ease;
+    }
+
+    .galeria a:hover img { transform: scale(1.03); }
+
+    /* lightbox */
+    .lightbox {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.88);
+      z-index: 100;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+    }
+
+    .lightbox.ativo { display: flex; }
+
+    .lightbox img {
+      max-width: 100%;
+      max-height: 90vh;
+      object-fit: contain;
+      border-radius: 2px;
+    }
+
+    .lightbox-fechar {
+      position: absolute;
+      top: 20px;
+      right: 28px;
+      font-size: 2rem;
+      color: #fff;
+      cursor: pointer;
+      user-select: none;
+      line-height: 1;
+    }
+  </style>
+</head>
+<body>
+
+  <a href="../index.html" class="volta">&#8592; Voltar</a>
+
+  <h1>Imagens</h1>
+  <p class="subtitulo">Educa&ccedil;&atilde;o</p>
+
+  <div class="galeria">
+    <!-- Adicione as imagens abaixo. Exemplo:
+    <a onclick="abrir(this)">
+      <img src="nome-da-imagem.jpg" alt="Descrição">
+    </a>
+    -->
+  </div>
+
+  <div class="lightbox" id="lightbox" onclick="fechar()">
+    <span class="lightbox-fechar">&times;</span>
+    <img id="lightbox-img" src="" alt="">
+  </div>
+
+  <script>
+    function abrir(el) {
+      const img = el.querySelector('img');
+      document.getElementById('lightbox-img').src = img.src;
+      document.getElementById('lightbox').classList.add('ativo');
+    }
+    function fechar() {
+      document.getElementById('lightbox').classList.remove('ativo');
+    }
+  </script>
+
+</body>
+</html>

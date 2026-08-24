@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="../tema.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;600;700&display=swap" rel="stylesheet" />
+</head>
+<body>
+
+<button id="btn-voltar" onclick="location.href='../index.html'">← Voltar</button>
+
+<section id="hero">
+  <div id="hero-overlay">
+    <h1><span id="hero-icone"></span> <span id="hero-titulo"></span></h1>
+  </div>
+</section>
+
+<nav id="nav-botoes">
+  <button class="nav-btn" data-sec="sobre">Sobre</button>
+  <button class="nav-btn" data-sec="fotos">Fotos</button>
+  <button class="nav-btn" id="btn-historia" data-sec="historia">Nossa História</button>
+  <button class="nav-btn" data-sec="projetos">Projetos</button>
+  <button class="nav-btn" data-sec="contato">Contato</button>
+</nav>
+
+<main id="conteudo">
+
+  <div class="secao" id="sec-sobre">
+    <div class="sobre-texto">
+      <p>A Escola do Livre é um espaço de construção coletiva — onde o aprendizado não tem grade rígida e as pessoas chegam com o que sabem para compartilhar.</p>
+      <p>Aqui você conhece o projeto, as pessoas envolvidas e o que já foi construído juntos.</p>
+    </div>
+  </div>
+
+  <div class="secao" id="sec-fotos">
+    <div class="galeria" id="galeria-grid"></div>
+  </div>
+
+  <div class="secao" id="sec-historia">
+    <div class="linha-tempo">
+      <div class="lt-item">
+        <div class="lt-ano">— a preencher —</div>
+        <div class="lt-texto">Conte aqui a história coletiva da Escola do Livre — como surgiu, quem estava lá, o que foi construído.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="secao" id="sec-projetos">
+    <div class="projetos-grid">
+      <div class="projeto-card">
+        <h3>— a preencher —</h3>
+        <p>Descreva aqui os projetos e iniciativas da Escola do Livre.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="secao" id="sec-contato">
+    <div class="contato-lista">
+      <a class="contato-item" href="https://wa.me/55XXXXXXXXXXX" target="_blank"><span>💬</span> WhatsApp</a>
+      <a class="contato-item" href="mailto:nilton@niltonbakargi.com"><span>✉️</span> nilton@niltonbakargi.com</a>
+    </div>
+  </div>
+
+</main>
+
+<script>
+window.TEMA = {
+  nome: 'Escola do Livre',
+  icone: '📚',
+  cor1: '#6c3483',
+  cor2: '#8e44ad',
+  historia: 'Nossa História',
+  imagens: [],
+  fotos: [],
+};
+</script>
+<script src="../tema.js"></script>
+<script>iniciarTema();</script>
+</body>
+</html>
