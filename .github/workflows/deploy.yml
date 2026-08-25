@@ -20,3 +20,10 @@ jobs:
           server-dir: /public_html/
           protocol: ftps
           port: 21
+          timeout: 60000
+          exclude: |
+            **/.git*
+            **/.git*/**
+            .claude/**
+            .codewhale/**
+            .ftpignore
