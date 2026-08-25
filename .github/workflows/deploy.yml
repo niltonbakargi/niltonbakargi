@@ -17,6 +17,6 @@ jobs:
           server: ${{ secrets.FTP_SERVER }}
           username: ${{ secrets.FTP_USERNAME }}
           password: ${{ secrets.FTP_PASSWORD }}
-          server-dir: /niltonbakargi.com/niltonbakargi/public_html/
+          server-dir: /niltonbakargi.com/public_html/
           protocol: ftps
           port: 21
