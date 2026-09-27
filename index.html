@@ -9,14 +9,16 @@
     *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
 
     :root {
-      --accent: #2c5f2e;
-      --text:   #1a1a1a;
-      --muted:  #777777;
+      --green:  #16a34a;
+      --blue:   #0284c7;
+      --text:   #1e293b;
+      --muted:  #64748b;
+      --border: #e2e8f0;
     }
 
     body {
       font-family: 'Montserrat', sans-serif;
-      background: #fff;
+      background: #f8fafc;
       color: var(--text);
       min-height: 100vh;
       display: flex;
@@ -50,7 +52,7 @@
     .divider {
       width: 40px;
       height: 2px;
-      background: var(--accent);
+      background: linear-gradient(90deg, var(--green), var(--blue));
       margin: 18px auto 0;
       border-radius: 2px;
     }
@@ -79,19 +81,24 @@
       font-weight: 700;
       letter-spacing: 3px;
       text-transform: uppercase;
-      color: var(--accent);
       text-align: center;
       cursor: pointer;
       user-select: none;
       padding-bottom: 4px;
+      transition: opacity 0.2s;
     }
 
     .area-seta {
       font-size: 0.55rem;
-      color: var(--accent);
       opacity: 0.5;
       transition: transform 0.35s ease, opacity 0.2s;
     }
+
+    #area-florestal .area-titulo,
+    #area-florestal .area-seta { color: var(--green); }
+
+    #area-geo .area-titulo,
+    #area-geo .area-seta      { color: var(--blue); }
 
     /* LISTA DE ITENS — oculta por padrão */
     .area-lista {
@@ -109,6 +116,8 @@
         transform: rotate(180deg);
         opacity: 1;
       }
+      #area-florestal .area-titulo:hover { color: var(--green); }
+      #area-geo       .area-titulo:hover { color: var(--blue); }
     }
 
     /* Revelada por clique/toque (JS adiciona .ativo) */
@@ -127,10 +136,10 @@
     }
 
     .item {
-      border-bottom: 1px solid #e8e8e8;
+      border-bottom: 1px solid var(--border);
     }
 
-    .item:first-child { border-top: 1px solid #e8e8e8; }
+    .item:first-child { border-top: 1px solid var(--border); }
 
     .item-titulo {
       display: flex;
@@ -146,7 +155,8 @@
       gap: 12px;
     }
 
-    .item-titulo:hover { color: var(--accent); }
+    #area-florestal .item-titulo:hover { color: var(--green); }
+    #area-geo       .item-titulo:hover { color: var(--blue); }
 
     .item-seta {
       font-size: 0.55rem;
@@ -155,17 +165,15 @@
       transition: transform 0.25s, color 0.2s;
     }
 
-    .item.aberto .item-seta {
-      transform: rotate(180deg);
-      color: var(--accent);
-    }
+    #area-florestal .item.aberto .item-seta { transform: rotate(180deg); color: var(--green); }
+    #area-geo       .item.aberto .item-seta { transform: rotate(180deg); color: var(--blue); }
 
     .item-texto {
       display: none;
       padding: 0 0 14px;
       font-size: 0.82rem;
       font-weight: 300;
-      color: #666;
+      color: var(--muted);
       line-height: 1.8;
     }
 
@@ -184,7 +192,7 @@
       transition: color 0.2s;
     }
 
-    .whatsapp:hover { color: #25d366; }
+    .whatsapp:hover { color: #22c55e; }
     .whatsapp svg { width: 16px; height: 16px; fill: currentColor; flex-shrink: 0; }
 
     /* RESPONSIVE */
