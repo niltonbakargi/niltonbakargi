@@ -9,66 +9,39 @@
     *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
 
     :root {
-      --bg:      #ffffff;
-      --surface: #f7f7f7;
-      --card:    #efefef;
-      --border:  #d8d8d8;
-      --accent:  #2c5f2e;
-      --text:    #1a1a1a;
-      --muted:   #777777;
-      --ease:    0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      --accent: #2c5f2e;
+      --text:   #1a1a1a;
+      --muted:  #777777;
+      --card:   #f2f2f2;
     }
 
     body {
       font-family: 'Montserrat', sans-serif;
-      background: var(--bg);
+      background: #fff;
       color: var(--text);
       min-height: 100vh;
       display: flex;
       flex-direction: column;
       align-items: center;
-      justify-content: center;
-      padding: 40px 20px;
+      padding: 64px 24px 80px;
     }
 
-    /* ── HEADER ── */
+    /* HEADER */
     .header {
       text-align: center;
-      margin-bottom: 56px;
-    }
-
-    .tel {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      font-size: 1.1rem;
-      letter-spacing: 2px;
-      color: #aaa;
-      text-decoration: none;
-      margin-bottom: 16px;
-      transition: color 0.2s;
-    }
-
-    .tel:hover { color: #25d366; }
-
-    .tel svg {
-      width: 18px;
-      height: 18px;
-      fill: currentColor;
-      flex-shrink: 0;
+      margin-bottom: 64px;
     }
 
     .nome {
-      font-size: clamp(2.2rem, 7vw, 4.5rem);
+      font-size: clamp(2rem, 6vw, 4rem);
       font-weight: 700;
       letter-spacing: 2px;
       text-transform: uppercase;
-      color: var(--text);
     }
 
     .cargo {
       margin-top: 10px;
-      font-size: 0.88rem;
+      font-size: 0.82rem;
       font-weight: 400;
       letter-spacing: 4px;
       text-transform: uppercase;
@@ -76,130 +49,105 @@
     }
 
     .divider {
-      width: 48px;
+      width: 40px;
       height: 2px;
       background: var(--accent);
-      margin: 20px auto 0;
+      margin: 18px auto 0;
       border-radius: 2px;
     }
 
-    /* ── AREAS ── */
+    /* AREAS */
     .areas {
       display: flex;
-      flex-direction: row;
-      gap: 24px;
+      gap: 48px;
       width: 100%;
-      max-width: 1000px;
+      max-width: 860px;
       align-items: flex-start;
       justify-content: center;
     }
 
-    .area-card {
+    .area {
       flex: 1;
-      background: transparent;
-      border: none;
-      border-radius: 0;
-      overflow: hidden;
-      transition: none;
       min-width: 0;
     }
 
-    .area-header {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      padding: 16px 28px;
-      cursor: pointer;
-      user-select: none;
+    .area-titulo {
+      font-size: 0.78rem;
+      font-weight: 700;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 24px;
       text-align: center;
     }
 
-    .area-name {
-      font-size: 0.85rem;
+    /* ITEMS */
+    .item {
+      border-bottom: 1px solid #e8e8e8;
+    }
+
+    .item:first-of-type { border-top: 1px solid #e8e8e8; }
+
+    .item-titulo {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 16px 0;
+      cursor: pointer;
+      font-size: 0.88rem;
       font-weight: 600;
-      letter-spacing: 1.5px;
-      text-transform: uppercase;
       color: var(--text);
+      user-select: none;
+      transition: color 0.2s;
+      gap: 12px;
     }
 
-    .area-chevron {
-      width: 16px;
-      height: 16px;
+    .item-titulo:hover { color: var(--accent); }
+
+    .item-seta {
+      font-size: 0.6rem;
+      color: #ccc;
       flex-shrink: 0;
-      color: var(--muted);
-      transition: transform var(--ease), color var(--ease);
+      transition: transform 0.25s, color 0.2s;
     }
 
-    .area-card.open .area-chevron {
+    .item.aberto .item-seta {
       transform: rotate(180deg);
       color: var(--accent);
     }
 
-    /* ── SUBITENS ── */
-    .area-sub {
-      max-height: 0;
-      overflow: hidden;
-      transition: max-height 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-    }
-
-    .area-card.open .area-sub {
-      max-height: 500px;
-    }
-
-    .sub-inner {
-      padding: 8px 10px 12px;
-      display: flex;
-      flex-direction: column;
-      gap: 2px;
-      align-items: center;
-    }
-
-    .sub-link {
-      display: block;
-      padding: 9px 12px;
-      border-radius: 8px;
-      color: var(--muted);
-      text-decoration: none;
+    .item-texto {
+      display: none;
+      padding: 0 0 16px;
       font-size: 0.82rem;
-      font-weight: 500;
-      letter-spacing: 0.3px;
-      text-align: center;
-      transition: background var(--ease), color var(--ease);
+      font-weight: 300;
+      color: #666;
+      line-height: 1.8;
     }
 
-    .sub-link:hover {
-      background: var(--card);
-      color: var(--accent);
-    }
+    .item.aberto .item-texto { display: block; }
 
-    /* ── WHATSAPP ── */
+    /* WHATSAPP */
     .whatsapp {
-      margin-top: 48px;
+      margin-top: 64px;
       display: flex;
       align-items: center;
       gap: 9px;
-      font-size: 0.88rem;
-      font-weight: 400;
+      font-size: 0.85rem;
       letter-spacing: 1.5px;
       color: var(--muted);
       text-decoration: none;
-      transition: color var(--ease);
+      transition: color 0.2s;
     }
 
-    .whatsapp:hover { color: var(--accent); }
+    .whatsapp:hover { color: #25d366; }
+    .whatsapp svg { width: 16px; height: 16px; fill: currentColor; flex-shrink: 0; }
 
-    .whatsapp svg {
-      width: 17px;
-      height: 17px;
-      fill: currentColor;
-      flex-shrink: 0;
-    }
-
-    /* ── RESPONSIVE ── */
-    @media (max-width: 600px) {
+    /* RESPONSIVE */
+    @media (max-width: 620px) {
       .areas {
         flex-direction: column;
-        max-width: 100%;
+        gap: 48px;
       }
     }
   </style>
@@ -207,90 +155,105 @@
 <body>
 
   <header class="header">
-    <a href="https://wa.me/5567981415533" target="_blank" class="tel">
-      <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
-      67 98141-5533
-    </a>
     <h1 class="nome">Nilton Dobes Bakargi</h1>
+    <p class="cargo">Engenheiro Florestal &amp; Topógrafo</p>
+    <div class="divider"></div>
   </header>
 
-  <nav class="areas">
-
-    <!-- EDUCACAO -->
-    <div class="area-card" id="card-educacao">
-      <div class="area-header" onclick="toggle('card-educacao')">
-        <span class="area-name">Educa&ccedil;&atilde;o</span>
-      </div>
-      <div class="area-sub">
-        <div class="sub-inner">
-          <a class="sub-link" href="mecanica/index.html">Mec&acirc;nica Geral &mdash; SENAI</a>
-          <a class="sub-link" href="ed-fisica/index.html">Educa&ccedil;&atilde;o F&iacute;sica &mdash; UFMS</a>
-          <a class="sub-link" href="imagens/educacao.html">Imagens</a>
-          <a class="sub-link" href="diplomas/educacao.html">Diplomas</a>
-        </div>
-      </div>
-    </div>
+  <div class="areas">
 
     <!-- ENG. FLORESTAL -->
-    <div class="area-card" id="card-florestal">
-      <div class="area-header" onclick="toggle('card-florestal')">
-        <span class="area-name">Eng. Florestal</span>
-      </div>
-      <div class="area-sub">
-        <div class="sub-inner">
-          <a class="sub-link" href="topografia/index.html">Topografia</a>
-          <a class="sub-link" href="eng-florestal/index.html">Meio Ambiente</a>
-          <a class="sub-link" href="sustentabilidade/index.html" target="_blank">Ecologia</a>
-          <a class="sub-link" href="imagens/florestal.html">Imagens</a>
-          <a class="sub-link" href="diplomas/florestal.html">Diplomas</a>
+    <section class="area">
+      <p class="area-titulo">Eng. Florestal</p>
+
+      <div class="item">
+        <div class="item-titulo" onclick="toggle(this)">
+          Invent&aacute;rio Florestal <span class="item-seta">&#9660;</span>
         </div>
+        <div class="item-texto">Levantamento e identifica&ccedil;&atilde;o de esp&eacute;cies arb&oacute;reas urbanas e nativas, com emiss&atilde;o de laudo t&eacute;cnico e ART.</div>
       </div>
-    </div>
 
-    <!-- TECNOLOGIA DA INFORMACAO -->
-    <div class="area-card" id="card-ti">
-      <div class="area-header" onclick="toggle('card-ti')">
-        <span class="area-name" style="white-space: nowrap;">Tecnologia da Informa&ccedil;&atilde;o</span>
-      </div>
-      <div class="area-sub">
-        <div class="sub-inner">
-          <a class="sub-link" href="ti/index.html" target="_blank">Aplica&ccedil;&otilde;es em Desenvolvimento</a>
-          <a class="sub-link" href="diplomas/ti.html">Diplomas</a>
+      <div class="item">
+        <div class="item-titulo" onclick="toggle(this)">
+          Recupera&ccedil;&atilde;o de &Aacute;reas Degradadas <span class="item-seta">&#9660;</span>
         </div>
+        <div class="item-texto">Planejamento e execu&ccedil;&atilde;o de projetos de restaura&ccedil;&atilde;o ecol&oacute;gica em &aacute;reas de preserva&ccedil;&atilde;o permanente e reserva legal.</div>
       </div>
-    </div>
 
-  </nav>
+      <div class="item">
+        <div class="item-titulo" onclick="toggle(this)">
+          CAR &mdash; Cadastro Ambiental Rural <span class="item-seta">&#9660;</span>
+        </div>
+        <div class="item-texto">Elabora&ccedil;&atilde;o, regulariza&ccedil;&atilde;o e atualiza&ccedil;&atilde;o do Cadastro Ambiental Rural junto ao SICAR, com an&aacute;lise da propriedade e adequa&ccedil;&atilde;o &agrave; legisla&ccedil;&atilde;o do C&oacute;digo Florestal.</div>
+      </div>
 
+      <div class="item">
+        <div class="item-titulo" onclick="toggle(this)">
+          Defesas Ambientais <span class="item-seta">&#9660;</span>
+        </div>
+        <div class="item-texto">Assessoria t&eacute;cnica em defesas administrativas e jur&iacute;dicas: multas ambientais, TACs, inqu&eacute;ritos civis, laudos ambientais e demais exig&ecirc;ncias de &oacute;rg&atilde;os ambientais.</div>
+      </div>
+
+      <div class="item">
+        <div class="item-titulo" onclick="toggle(this)">
+          Plantio e Manejo de Mudas Nativas <span class="item-seta">&#9660;</span>
+        </div>
+        <div class="item-texto">Sele&ccedil;&atilde;o de esp&eacute;cies, plantio e acompanhamento t&eacute;cnico de mudas nativas para recomposi&ccedil;&atilde;o de vegeta&ccedil;&atilde;o.</div>
+      </div>
+
+      <div class="item">
+        <div class="item-titulo" onclick="toggle(this)">
+          Remo&ccedil;&atilde;o de &Aacute;rvores Perigosas <span class="item-seta">&#9660;</span>
+        </div>
+        <div class="item-texto">Avalia&ccedil;&atilde;o fitossanit&aacute;ria, emiss&atilde;o de laudo e obten&ccedil;&atilde;o de autoriza&ccedil;&atilde;o para remo&ccedil;&atilde;o segura de &aacute;rvores de risco.</div>
+      </div>
+    </section>
+
+    <!-- TOPOGRAFIA -->
+    <section class="area">
+      <p class="area-titulo">Topografia</p>
+
+      <div class="item">
+        <div class="item-titulo" onclick="toggle(this)">
+          Georreferenciamento de Im&oacute;veis Rurais <span class="item-seta">&#9660;</span>
+        </div>
+        <div class="item-texto">Medi&ccedil;&atilde;o e certifica&ccedil;&atilde;o de propriedades rurais junto ao INCRA, conforme exig&ecirc;ncia legal para transfer&ecirc;ncia e financiamento de im&oacute;veis rurais.</div>
+      </div>
+
+      <div class="item">
+        <div class="item-titulo" onclick="toggle(this)">
+          Levantamento Topogr&aacute;fico e Planialtim&eacute;trico <span class="item-seta">&#9660;</span>
+        </div>
+        <div class="item-texto">Levantamento detalhado do terreno com representa&ccedil;&atilde;o de curvas de n&iacute;vel, declividades e elementos f&iacute;sicos, para projetos de engenharia e arquitetura.</div>
+      </div>
+
+      <div class="item">
+        <div class="item-titulo" onclick="toggle(this)">
+          Loca&ccedil;&atilde;o de Terrenos <span class="item-seta">&#9660;</span>
+        </div>
+        <div class="item-texto">Implanta&ccedil;&atilde;o de obras no terreno com base em projeto aprovado, garantindo a correta posi&ccedil;&atilde;o das constru&ccedil;&otilde;es conforme limites da propriedade.</div>
+      </div>
+
+      <div class="item">
+        <div class="item-titulo" onclick="toggle(this)">
+          Desmembramento e Remembramento <span class="item-seta">&#9660;</span>
+        </div>
+        <div class="item-texto">Divis&atilde;o ou unifica&ccedil;&atilde;o de &aacute;reas urbanas e rurais com elabora&ccedil;&atilde;o de memorial descritivo, planta t&eacute;cnica e registro em cart&oacute;rio.</div>
+      </div>
+    </section>
+
+  </div>
+
+  <a href="https://wa.me/5567981415533" target="_blank" class="whatsapp">
+    <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+    67 98141-5533
+  </a>
 
   <script>
-    function toggle(id) {
-      const card = document.getElementById(id);
-      const isOpen = card.classList.contains('open');
-
-      // fecha todos
-      document.querySelectorAll('.area-card').forEach(c => c.classList.remove('open'));
-
-      // abre o clicado se estava fechado
-      if (!isOpen) card.classList.add('open');
+    function toggle(el) {
+      el.parentElement.classList.toggle('aberto');
     }
-
-    // hover no desktop
-    document.querySelectorAll('.area-card').forEach(card => {
-      card.addEventListener('mouseenter', () => {
-        document.querySelectorAll('.area-card').forEach(c => c.classList.remove('open'));
-        card.classList.add('open');
-      });
-      card.addEventListener('mouseleave', () => {
-        card.classList.remove('open');
-      });
-    });
   </script>
 
 </body>
 </html>
-
- 
- 
- 
- 
