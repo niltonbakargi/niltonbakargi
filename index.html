@@ -12,7 +12,6 @@
       --accent: #2c5f2e;
       --text:   #1a1a1a;
       --muted:  #777777;
-      --card:   #f2f2f2;
     }
 
     body {
@@ -59,7 +58,7 @@
     /* AREAS */
     .areas {
       display: flex;
-      gap: 48px;
+      gap: 64px;
       width: 100%;
       max-width: 860px;
       align-items: flex-start;
@@ -72,29 +71,74 @@
     }
 
     .area-titulo {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
       font-size: 0.78rem;
       font-weight: 700;
       letter-spacing: 3px;
       text-transform: uppercase;
       color: var(--accent);
-      margin-bottom: 24px;
       text-align: center;
+      cursor: pointer;
+      user-select: none;
+      padding-bottom: 4px;
+    }
+
+    .area-seta {
+      font-size: 0.55rem;
+      color: var(--accent);
+      opacity: 0.5;
+      transition: transform 0.35s ease, opacity 0.2s;
+    }
+
+    /* LISTA DE ITENS — oculta por padrão */
+    .area-lista {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.45s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    /* Revelada por hover no desktop */
+    @media (hover: hover) and (pointer: fine) {
+      .area:hover .area-lista {
+        max-height: 800px;
+      }
+      .area:hover .area-seta {
+        transform: rotate(180deg);
+        opacity: 1;
+      }
+    }
+
+    /* Revelada por clique/toque (JS adiciona .ativo) */
+    .area.ativo .area-lista {
+      max-height: 800px;
+    }
+
+    .area.ativo .area-seta {
+      transform: rotate(180deg);
+      opacity: 1;
     }
 
     /* ITEMS */
+    .lista-inner {
+      padding-top: 20px;
+    }
+
     .item {
       border-bottom: 1px solid #e8e8e8;
     }
 
-    .item:first-of-type { border-top: 1px solid #e8e8e8; }
+    .item:first-child { border-top: 1px solid #e8e8e8; }
 
     .item-titulo {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      padding: 16px 0;
+      padding: 14px 0;
       cursor: pointer;
-      font-size: 0.88rem;
+      font-size: 0.85rem;
       font-weight: 600;
       color: var(--text);
       user-select: none;
@@ -105,7 +149,7 @@
     .item-titulo:hover { color: var(--accent); }
 
     .item-seta {
-      font-size: 0.6rem;
+      font-size: 0.55rem;
       color: #ccc;
       flex-shrink: 0;
       transition: transform 0.25s, color 0.2s;
@@ -118,7 +162,7 @@
 
     .item-texto {
       display: none;
-      padding: 0 0 16px;
+      padding: 0 0 14px;
       font-size: 0.82rem;
       font-weight: 300;
       color: #666;
@@ -147,7 +191,7 @@
     @media (max-width: 620px) {
       .areas {
         flex-direction: column;
-        gap: 48px;
+        gap: 40px;
       }
     }
   </style>
@@ -156,89 +200,103 @@
 
   <header class="header">
     <h1 class="nome">Nilton Dobes Bakargi</h1>
-    <p class="cargo">Engenheiro Florestal &amp; Topógrafo</p>
+    <p class="cargo">Eng. Florestal &amp; Geotecnologias</p>
     <div class="divider"></div>
   </header>
 
   <div class="areas">
 
     <!-- ENG. FLORESTAL -->
-    <section class="area">
-      <p class="area-titulo">Eng. Florestal</p>
+    <section class="area" id="area-florestal">
+      <p class="area-titulo" onclick="toggleArea('area-florestal')">
+        Eng. Florestal <span class="area-seta">&#9660;</span>
+      </p>
+      <div class="area-lista">
+        <div class="lista-inner">
 
-      <div class="item">
-        <div class="item-titulo" onclick="toggle(this)">
-          Invent&aacute;rio Florestal <span class="item-seta">&#9660;</span>
-        </div>
-        <div class="item-texto">Levantamento e identifica&ccedil;&atilde;o de esp&eacute;cies arb&oacute;reas urbanas e nativas, com emiss&atilde;o de laudo t&eacute;cnico e ART.</div>
-      </div>
+          <div class="item">
+            <div class="item-titulo" onclick="toggleItem(this)">
+              Invent&aacute;rio Florestal <span class="item-seta">&#9660;</span>
+            </div>
+            <div class="item-texto">Levantamento e identifica&ccedil;&atilde;o de esp&eacute;cies arb&oacute;reas urbanas e nativas, com emiss&atilde;o de laudo t&eacute;cnico e ART.</div>
+          </div>
 
-      <div class="item">
-        <div class="item-titulo" onclick="toggle(this)">
-          Recupera&ccedil;&atilde;o de &Aacute;reas Degradadas <span class="item-seta">&#9660;</span>
-        </div>
-        <div class="item-texto">Planejamento e execu&ccedil;&atilde;o de projetos de restaura&ccedil;&atilde;o ecol&oacute;gica em &aacute;reas de preserva&ccedil;&atilde;o permanente e reserva legal.</div>
-      </div>
+          <div class="item">
+            <div class="item-titulo" onclick="toggleItem(this)">
+              Recupera&ccedil;&atilde;o de &Aacute;reas Degradadas <span class="item-seta">&#9660;</span>
+            </div>
+            <div class="item-texto">Planejamento e execu&ccedil;&atilde;o de projetos de restaura&ccedil;&atilde;o ecol&oacute;gica em &aacute;reas de preserva&ccedil;&atilde;o permanente e reserva legal.</div>
+          </div>
 
-      <div class="item">
-        <div class="item-titulo" onclick="toggle(this)">
-          CAR &mdash; Cadastro Ambiental Rural <span class="item-seta">&#9660;</span>
-        </div>
-        <div class="item-texto">Elabora&ccedil;&atilde;o, regulariza&ccedil;&atilde;o e atualiza&ccedil;&atilde;o do Cadastro Ambiental Rural junto ao SICAR, com an&aacute;lise da propriedade e adequa&ccedil;&atilde;o &agrave; legisla&ccedil;&atilde;o do C&oacute;digo Florestal.</div>
-      </div>
+          <div class="item">
+            <div class="item-titulo" onclick="toggleItem(this)">
+              CAR &mdash; Cadastro Ambiental Rural <span class="item-seta">&#9660;</span>
+            </div>
+            <div class="item-texto">Elabora&ccedil;&atilde;o, regulariza&ccedil;&atilde;o e atualiza&ccedil;&atilde;o do Cadastro Ambiental Rural junto ao SICAR, com an&aacute;lise da propriedade e adequa&ccedil;&atilde;o &agrave; legisla&ccedil;&atilde;o do C&oacute;digo Florestal.</div>
+          </div>
 
-      <div class="item">
-        <div class="item-titulo" onclick="toggle(this)">
-          Defesas Ambientais <span class="item-seta">&#9660;</span>
-        </div>
-        <div class="item-texto">Assessoria t&eacute;cnica em defesas administrativas e jur&iacute;dicas: multas ambientais, TACs, inqu&eacute;ritos civis, laudos ambientais e demais exig&ecirc;ncias de &oacute;rg&atilde;os ambientais.</div>
-      </div>
+          <div class="item">
+            <div class="item-titulo" onclick="toggleItem(this)">
+              Defesas Ambientais <span class="item-seta">&#9660;</span>
+            </div>
+            <div class="item-texto">Assessoria t&eacute;cnica em defesas administrativas e jur&iacute;dicas: multas ambientais, TACs, inqu&eacute;ritos civis, laudos ambientais e demais exig&ecirc;ncias de &oacute;rg&atilde;os ambientais.</div>
+          </div>
 
-      <div class="item">
-        <div class="item-titulo" onclick="toggle(this)">
-          Plantio e Manejo de Mudas Nativas <span class="item-seta">&#9660;</span>
-        </div>
-        <div class="item-texto">Sele&ccedil;&atilde;o de esp&eacute;cies, plantio e acompanhamento t&eacute;cnico de mudas nativas para recomposi&ccedil;&atilde;o de vegeta&ccedil;&atilde;o.</div>
-      </div>
+          <div class="item">
+            <div class="item-titulo" onclick="toggleItem(this)">
+              Plantio e Manejo de Mudas Nativas <span class="item-seta">&#9660;</span>
+            </div>
+            <div class="item-texto">Sele&ccedil;&atilde;o de esp&eacute;cies, plantio e acompanhamento t&eacute;cnico de mudas nativas para recomposi&ccedil;&atilde;o de vegeta&ccedil;&atilde;o.</div>
+          </div>
 
-      <div class="item">
-        <div class="item-titulo" onclick="toggle(this)">
-          Remo&ccedil;&atilde;o de &Aacute;rvores Perigosas <span class="item-seta">&#9660;</span>
+          <div class="item">
+            <div class="item-titulo" onclick="toggleItem(this)">
+              Remo&ccedil;&atilde;o de &Aacute;rvores Perigosas <span class="item-seta">&#9660;</span>
+            </div>
+            <div class="item-texto">Avalia&ccedil;&atilde;o fitossanit&aacute;ria, emiss&atilde;o de laudo e obten&ccedil;&atilde;o de autoriza&ccedil;&atilde;o para remo&ccedil;&atilde;o segura de &aacute;rvores de risco.</div>
+          </div>
+
         </div>
-        <div class="item-texto">Avalia&ccedil;&atilde;o fitossanit&aacute;ria, emiss&atilde;o de laudo e obten&ccedil;&atilde;o de autoriza&ccedil;&atilde;o para remo&ccedil;&atilde;o segura de &aacute;rvores de risco.</div>
       </div>
     </section>
 
-    <!-- TOPOGRAFIA -->
-    <section class="area">
-      <p class="area-titulo">Topografia</p>
+    <!-- GEOTECNOLOGIAS -->
+    <section class="area" id="area-geo">
+      <p class="area-titulo" onclick="toggleArea('area-geo')">
+        Geotecnologias <span class="area-seta">&#9660;</span>
+      </p>
+      <div class="area-lista">
+        <div class="lista-inner">
 
-      <div class="item">
-        <div class="item-titulo" onclick="toggle(this)">
-          Georreferenciamento de Im&oacute;veis Rurais <span class="item-seta">&#9660;</span>
-        </div>
-        <div class="item-texto">Medi&ccedil;&atilde;o e certifica&ccedil;&atilde;o de propriedades rurais junto ao INCRA, conforme exig&ecirc;ncia legal para transfer&ecirc;ncia e financiamento de im&oacute;veis rurais.</div>
-      </div>
+          <div class="item">
+            <div class="item-titulo" onclick="toggleItem(this)">
+              Georreferenciamento de Im&oacute;veis Rurais <span class="item-seta">&#9660;</span>
+            </div>
+            <div class="item-texto">Medi&ccedil;&atilde;o e certifica&ccedil;&atilde;o de propriedades rurais junto ao INCRA, conforme exig&ecirc;ncia legal para transfer&ecirc;ncia e financiamento de im&oacute;veis rurais.</div>
+          </div>
 
-      <div class="item">
-        <div class="item-titulo" onclick="toggle(this)">
-          Levantamento Topogr&aacute;fico e Planialtim&eacute;trico <span class="item-seta">&#9660;</span>
-        </div>
-        <div class="item-texto">Levantamento detalhado do terreno com representa&ccedil;&atilde;o de curvas de n&iacute;vel, declividades e elementos f&iacute;sicos, para projetos de engenharia e arquitetura.</div>
-      </div>
+          <div class="item">
+            <div class="item-titulo" onclick="toggleItem(this)">
+              Levantamento Topogr&aacute;fico e Planialtim&eacute;trico <span class="item-seta">&#9660;</span>
+            </div>
+            <div class="item-texto">Levantamento detalhado do terreno com representa&ccedil;&atilde;o de curvas de n&iacute;vel, declividades e elementos f&iacute;sicos, para projetos de engenharia e arquitetura.</div>
+          </div>
 
-      <div class="item">
-        <div class="item-titulo" onclick="toggle(this)">
-          Loca&ccedil;&atilde;o de Terrenos <span class="item-seta">&#9660;</span>
-        </div>
-        <div class="item-texto">Implanta&ccedil;&atilde;o de obras no terreno com base em projeto aprovado, garantindo a correta posi&ccedil;&atilde;o das constru&ccedil;&otilde;es conforme limites da propriedade.</div>
-      </div>
+          <div class="item">
+            <div class="item-titulo" onclick="toggleItem(this)">
+              Loca&ccedil;&atilde;o de Terrenos <span class="item-seta">&#9660;</span>
+            </div>
+            <div class="item-texto">Implanta&ccedil;&atilde;o de obras no terreno com base em projeto aprovado, garantindo a correta posi&ccedil;&atilde;o das constru&ccedil;&otilde;es conforme limites da propriedade.</div>
+          </div>
 
-      <div class="item">
-        <div class="item-titulo" onclick="toggle(this)">
-          Desmembramento e Remembramento <span class="item-seta">&#9660;</span>
+          <div class="item">
+            <div class="item-titulo" onclick="toggleItem(this)">
+              Desmembramento e Remembramento <span class="item-seta">&#9660;</span>
+            </div>
+            <div class="item-texto">Divis&atilde;o ou unifica&ccedil;&atilde;o de &aacute;reas urbanas e rurais com elabora&ccedil;&atilde;o de memorial descritivo, planta t&eacute;cnica e registro em cart&oacute;rio.</div>
+          </div>
+
         </div>
-        <div class="item-texto">Divis&atilde;o ou unifica&ccedil;&atilde;o de &aacute;reas urbanas e rurais com elabora&ccedil;&atilde;o de memorial descritivo, planta t&eacute;cnica e registro em cart&oacute;rio.</div>
       </div>
     </section>
 
@@ -250,7 +308,11 @@
   </a>
 
   <script>
-    function toggle(el) {
+    function toggleArea(id) {
+      document.getElementById(id).classList.toggle('ativo');
+    }
+
+    function toggleItem(el) {
       el.parentElement.classList.toggle('aberto');
     }
   </script>
