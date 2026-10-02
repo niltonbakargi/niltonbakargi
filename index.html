@@ -209,8 +209,12 @@
 
     .trabalhos-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
-      gap: 20px;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 24px;
+    }
+
+    @media (max-width: 620px) {
+      .trabalhos-grid { grid-template-columns: 1fr; }
     }
 
     .trabalho-card {
@@ -222,14 +226,15 @@
 
     .trabalho-card img {
       width: 100%;
-      height: 170px;
+      height: 260px;
       object-fit: cover;
       display: block;
+      cursor: zoom-in;
     }
 
     .trabalho-sem-img {
       width: 100%;
-      height: 170px;
+      height: 260px;
       background: var(--border);
       display: flex;
       align-items: center;
@@ -265,6 +270,38 @@
       color: var(--muted);
       line-height: 1.7;
     }
+
+    /* LIGHTBOX */
+    .lightbox {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.88);
+      z-index: 1000;
+      align-items: center;
+      justify-content: center;
+      cursor: zoom-out;
+    }
+    .lightbox.ativo { display: flex; }
+    .lightbox img {
+      max-width: 92vw;
+      max-height: 92vh;
+      object-fit: contain;
+      border-radius: 4px;
+      cursor: default;
+    }
+    .lightbox-fechar {
+      position: absolute;
+      top: 18px;
+      right: 26px;
+      color: white;
+      font-size: 2.2rem;
+      cursor: pointer;
+      opacity: 0.7;
+      line-height: 1;
+      user-select: none;
+    }
+    .lightbox-fechar:hover { opacity: 1; }
 
     /* WHATSAPP */
     .whatsapp {
@@ -422,6 +459,11 @@
     67 98141-5533
   </a>
 
+  <div class="lightbox" id="lightbox" onclick="fecharLightbox()">
+    <span class="lightbox-fechar" onclick="fecharLightbox()">&times;</span>
+    <img id="lightbox-img" src="" alt="" onclick="event.stopPropagation()" />
+  </div>
+
   <script>
     // Carrega trabalhos do JSON
     fetch('trabalhos.json')
@@ -440,7 +482,7 @@
           }
 
           var imgHtml = t.imagem
-            ? '<img src="' + t.imagem + '" alt="' + t.titulo + '" loading="lazy" />'
+            ? '<img src="' + t.imagem + '" alt="' + t.titulo + '" loading="lazy" onclick="abrirLightbox(\'' + t.imagem + '\',\'' + t.titulo.replace(/'/g,"\\'") + '\')" />'
             : '<div class="trabalho-sem-img">sem imagem</div>';
 
           var card = document.createElement('div');
@@ -458,6 +500,22 @@
         secao.style.display = 'block';
       })
       .catch(function(){});
+
+    function abrirLightbox(src, alt) {
+      document.getElementById('lightbox-img').src = src;
+      document.getElementById('lightbox-img').alt = alt;
+      document.getElementById('lightbox').classList.add('ativo');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function fecharLightbox() {
+      document.getElementById('lightbox').classList.remove('ativo');
+      document.body.style.overflow = '';
+    }
+
+    document.addEventListener('keydown', function(e) {
+      if (e.key === 'Escape') fecharLightbox();
+    });
 
     function toggleArea(id) {
       document.getElementById(id).classList.toggle('ativo');
