@@ -4,8 +4,8 @@
 // ============================================================
 define('DB_HOST', 'localhost');
 define('DB_NAME', 'b62a4147_niltonbakargi');
-define('DB_USER', '');   // ex: b62a4147_usuario
-define('DB_PASS', '');
+define('DB_USER', 'b62a4147_site_niltonbakargi');   // ex: b62a4147_usuario
+define('DB_PASS', ';1$21H,9y)ZYu3D&');
 
 function db(): PDO {
     static $pdo;
