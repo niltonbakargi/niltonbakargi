@@ -268,6 +268,25 @@
       line-height: 1.7;
     }
 
+    .trabalho-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 10px;
+      padding-top: 10px;
+      border-top: 1px solid var(--border);
+    }
+
+    .trabalho-meta span {
+      font-size: 0.75rem;
+      font-weight: 600;
+      color: var(--muted);
+      letter-spacing: 0.5px;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+
     /* LIGHTBOX */
     .lightbox {
       display: none;
@@ -486,6 +505,14 @@
             ? '<img src="' + t.imagem + '" alt="' + t.titulo + '" loading="lazy" onclick="abrirLightbox(\'' + t.imagem + '\',\'' + t.titulo.replace(/'/g,"\\'") + '\')" />'
             : '<div class="trabalho-sem-img">sem imagem</div>';
 
+          var metaHtml = '';
+          if (t.local || t.cliente) {
+            metaHtml = '<div class="trabalho-meta">';
+            if (t.local)   metaHtml += '<span>&#128205; ' + t.local   + '</span>';
+            if (t.cliente) metaHtml += '<span>&#128100; ' + t.cliente + '</span>';
+            metaHtml += '</div>';
+          }
+
           var card = document.createElement('div');
           card.className = 'trabalho-card';
           card.innerHTML =
@@ -494,6 +521,7 @@
               '<div class="trabalho-data">' + dataStr + '</div>' +
               '<div class="trabalho-nome">' + t.titulo + '</div>' +
               '<div class="trabalho-desc">' + t.descricao + '</div>' +
+              metaHtml +
             '</div>';
           grid.appendChild(card);
         });

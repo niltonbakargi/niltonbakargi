@@ -7,11 +7,13 @@ if (empty($_SESSION['logado'])) {
     exit;
 }
 
-$titulo    = trim($_POST['titulo']    ?? '');
-$descricao = trim($_POST['descricao'] ?? '');
-$data_obra = trim($_POST['data']      ?? '');
-$categoria = in_array($_POST['categoria'] ?? '', ['florestal', 'geo'])
-             ? $_POST['categoria'] : 'geo';
+$titulo     = trim($_POST['titulo']     ?? '');
+$descricao  = trim($_POST['descricao']  ?? '');
+$data_obra  = trim($_POST['data']       ?? '');
+$local_obra = trim($_POST['local_obra'] ?? '');
+$cliente    = trim($_POST['cliente']    ?? '');
+$categoria  = in_array($_POST['categoria'] ?? '', ['florestal', 'geo'])
+              ? $_POST['categoria'] : 'geo';
 
 if (!$titulo || !$descricao || !$data_obra) {
     header('Location: index.php?erro=campos');
@@ -20,9 +22,9 @@ if (!$titulo || !$descricao || !$data_obra) {
 
 $pdo  = db();
 $stmt = $pdo->prepare(
-    "INSERT INTO trabalhos (titulo, categoria, descricao, data_obra) VALUES (?, ?, ?, ?)"
+    "INSERT INTO trabalhos (titulo, categoria, descricao, data_obra, local_obra, cliente) VALUES (?, ?, ?, ?, ?, ?)"
 );
-$stmt->execute([$titulo, $categoria, $descricao, $data_obra]);
+$stmt->execute([$titulo, $categoria, $descricao, $data_obra, $local_obra ?: null, $cliente ?: null]);
 $trabalho_id = (int) $pdo->lastInsertId();
 
 // Upload de multiplas imagens

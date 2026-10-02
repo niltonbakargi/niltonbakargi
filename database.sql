@@ -30,6 +30,8 @@ CREATE TABLE IF NOT EXISTS `trabalhos` (
   `categoria`   ENUM('florestal','geo') NOT NULL,
   `descricao`   TEXT            NOT NULL,
   `data_obra`   DATE            NULL     COMMENT 'data em que o serviço foi realizado',
+  `local_obra`  VARCHAR(255)    NULL     COMMENT 'cidade ou local do serviço',
+  `cliente`     VARCHAR(255)    NULL     COMMENT 'nome do cliente',
   `criado_em`   DATETIME        NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `ativo`       TINYINT(1)      NOT NULL DEFAULT 1,
   PRIMARY KEY (`id`),
@@ -38,6 +40,9 @@ CREATE TABLE IF NOT EXISTS `trabalhos` (
   KEY `idx_criado_em` (`criado_em`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+
+-- Migracao (rodar no phpMyAdmin se o banco ja existir):
+-- ALTER TABLE `trabalhos` ADD COLUMN `local_obra` VARCHAR(255) NULL AFTER `data_obra`, ADD COLUMN `cliente` VARCHAR(255) NULL AFTER `local_obra`;
 
 -- 3. TABELA DE FOTOS (múltiplas por trabalho)
 -- --------------------------------------------------------

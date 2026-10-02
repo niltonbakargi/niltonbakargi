@@ -173,6 +173,16 @@ $trabalhos = db()->query("
           <input type="file" name="imagens[]" accept=".jpg,.jpeg,.png,.webp" multiple />
         </div>
       </div>
+      <div class="form-linha">
+        <div class="form-grupo">
+          <label>Local</label>
+          <input type="text" name="local_obra" placeholder="Ex: Dourados - MS" />
+        </div>
+        <div class="form-grupo">
+          <label>Cliente</label>
+          <input type="text" name="cliente" placeholder="Ex: Fazenda Sao Joao" />
+        </div>
+      </div>
       <div class="form-grupo">
         <label>Descricao *</label>
         <textarea name="descricao" placeholder="Descreva o trabalho realizado..." required></textarea>

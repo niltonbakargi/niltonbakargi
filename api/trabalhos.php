@@ -9,6 +9,8 @@ $rows = db()->query("
         t.titulo,
         t.descricao,
         t.data_obra  AS data,
+        t.local_obra AS local,
+        t.cliente,
         t.categoria,
         (SELECT f.arquivo FROM trabalho_fotos f
          WHERE f.trabalho_id = t.id
