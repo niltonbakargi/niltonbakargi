@@ -7,62 +7,50 @@ if (empty($_SESSION['logado'])) {
     exit;
 }
 
-$arquivo_json = __DIR__ . '/../trabalhos.json';
-$trabalhos = [];
-if (file_exists($arquivo_json)) {
-    $trabalhos = json_decode(file_get_contents($arquivo_json), true) ?: [];
-}
-
 $titulo    = trim($_POST['titulo']    ?? '');
 $descricao = trim($_POST['descricao'] ?? '');
-$data      = trim($_POST['data']      ?? '');
+$data_obra = trim($_POST['data']      ?? '');
+$categoria = in_array($_POST['categoria'] ?? '', ['florestal', 'geo'])
+             ? $_POST['categoria'] : 'geo';
 
-if (!$titulo || !$descricao || !$data) {
+if (!$titulo || !$descricao || !$data_obra) {
     header('Location: index.php?erro=campos');
     exit;
 }
 
-$imagem = '';
-if (!empty($_FILES['imagem']['name'])) {
-    $ext      = strtolower(pathinfo($_FILES['imagem']['name'], PATHINFO_EXTENSION));
-    $permitidos = ['jpg', 'jpeg', 'png', 'webp'];
+$pdo  = db();
+$stmt = $pdo->prepare(
+    "INSERT INTO trabalhos (titulo, categoria, descricao, data_obra) VALUES (?, ?, ?, ?)"
+);
+$stmt->execute([$titulo, $categoria, $descricao, $data_obra]);
+$trabalho_id = (int) $pdo->lastInsertId();
 
-    if (!in_array($ext, $permitidos)) {
-        header('Location: index.php?erro=formato');
-        exit;
-    }
-
-    if ($_FILES['imagem']['size'] > 5 * 1024 * 1024) {
-        header('Location: index.php?erro=tamanho');
-        exit;
-    }
-
+// Upload de multiplas imagens
+if (!empty($_FILES['imagens']['name'][0])) {
     $dir_upload = __DIR__ . '/../uploads/trabalhos/';
     if (!is_dir($dir_upload)) {
         mkdir($dir_upload, 0755, true);
     }
 
-    $nome_arquivo = time() . '_' . bin2hex(random_bytes(4)) . '.' . $ext;
+    $permitidos  = ['jpg', 'jpeg', 'png', 'webp'];
+    $stmt_foto   = $pdo->prepare(
+        "INSERT INTO trabalho_fotos (trabalho_id, arquivo, ordem) VALUES (?, ?, ?)"
+    );
+    $ordem = 0;
 
-    if (!move_uploaded_file($_FILES['imagem']['tmp_name'], $dir_upload . $nome_arquivo)) {
-        header('Location: index.php?erro=upload');
-        exit;
+    foreach ($_FILES['imagens']['tmp_name'] as $i => $tmp) {
+        if ($_FILES['imagens']['error'][$i] !== UPLOAD_ERR_OK) continue;
+        if ($_FILES['imagens']['size'][$i]  > 5 * 1024 * 1024)  continue;
+
+        $ext = strtolower(pathinfo($_FILES['imagens']['name'][$i], PATHINFO_EXTENSION));
+        if (!in_array($ext, $permitidos)) continue;
+
+        $nome = time() . '_' . bin2hex(random_bytes(4)) . '.' . $ext;
+        if (move_uploaded_file($tmp, $dir_upload . $nome)) {
+            $stmt_foto->execute([$trabalho_id, 'uploads/trabalhos/' . $nome, $ordem++]);
+        }
     }
-
-    $imagem = 'uploads/trabalhos/' . $nome_arquivo;
 }
-
-$novo = [
-    'id'        => (string) time() . rand(100, 999),
-    'titulo'    => $titulo,
-    'descricao' => $descricao,
-    'data'      => $data,
-    'imagem'    => $imagem,
-];
-
-array_unshift($trabalhos, $novo);
-
-file_put_contents($arquivo_json, json_encode($trabalhos, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE));
 
 header('Location: index.php?msg=salvo');
 exit;

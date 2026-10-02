@@ -466,7 +466,7 @@
 
   <script>
     // Carrega trabalhos do JSON
-    fetch('trabalhos.json')
+    fetch('api/trabalhos.php')
       .then(function(r){ return r.json(); })
       .then(function(lista) {
         if (!lista || lista.length === 0) return;

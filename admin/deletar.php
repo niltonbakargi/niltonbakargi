@@ -12,28 +12,19 @@ if ($_SERVER['REQUEST_METHOD'] !== 'POST' || empty($_POST['id'])) {
     exit;
 }
 
-$id = $_POST['id'];
-$arquivo_json = __DIR__ . '/../trabalhos.json';
-$trabalhos = [];
+$id  = (int) $_POST['id'];
+$pdo = db();
 
-if (file_exists($arquivo_json)) {
-    $trabalhos = json_decode(file_get_contents($arquivo_json), true) ?: [];
+// Remove arquivos fisicos
+$fotos = $pdo->prepare("SELECT arquivo FROM trabalho_fotos WHERE trabalho_id = ?");
+$fotos->execute([$id]);
+foreach ($fotos->fetchAll() as $foto) {
+    $caminho = __DIR__ . '/../' . $foto['arquivo'];
+    if (file_exists($caminho)) unlink($caminho);
 }
 
-foreach ($trabalhos as $key => $t) {
-    if ($t['id'] === $id) {
-        if (!empty($t['imagem'])) {
-            $caminho_img = __DIR__ . '/../' . $t['imagem'];
-            if (file_exists($caminho_img)) {
-                unlink($caminho_img);
-            }
-        }
-        array_splice($trabalhos, $key, 1);
-        break;
-    }
-}
-
-file_put_contents($arquivo_json, json_encode($trabalhos, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE));
+// Remove do banco (CASCADE apaga trabalho_fotos)
+$pdo->prepare("DELETE FROM trabalhos WHERE id = ?")->execute([$id]);
 
 header('Location: index.php?msg=deletado');
 exit;
