@@ -3,8 +3,8 @@
 //  Preencha com as credenciais do MySQL (cPanel)
 // ============================================================
 define('DB_HOST', 'localhost');
-define('DB_NAME', '');   // ex: seulogin_niltonbakargi
-define('DB_USER', '');   // ex: seulogin_usuario
+define('DB_NAME', 'b62a4147_niltonbakargi');
+define('DB_USER', '');   // ex: b62a4147_usuario
 define('DB_PASS', '');
 
 function db(): PDO {
