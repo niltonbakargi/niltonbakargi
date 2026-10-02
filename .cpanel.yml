@@ -1,0 +1,5 @@
+---
+deployment:
+  tasks:
+    - export DEPLOYPATH=/home/b62a4147/public_html/niltonbakargi.com
+    - /usr/local/cpanel/bin/git-deploy-pull
