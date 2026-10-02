@@ -1,0 +1,10 @@
+# Credenciais — nunca commitar
+config/db.php
+
+# Uploads gerados pelo usuario
+uploads/trabalhos/*
+!uploads/trabalhos/.gitkeep
+
+# Sistema
+.DS_Store
+Thumbs.db
