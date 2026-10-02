@@ -1,6 +1,10 @@
 -- ============================================================
 --  Banco de dados: niltonbakargi
---  Criado para uso no cPanel / Hostgator via phpMyAdmin
+--
+--  ANTES de importar:
+--  1. Crie o banco via cPanel > MySQL Databases
+--  2. Selecione o banco criado no phpMyAdmin (menu lateral)
+--  3. Clique em Importar e selecione este arquivo
 -- ============================================================
 
 -- 1. TABELA DE ADMIN (login)
