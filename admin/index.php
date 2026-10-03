@@ -126,6 +126,9 @@ $trabalhos = db()->query("
     .badge { display: inline-block; font-size: 0.65rem; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; padding: 2px 7px; border-radius: 4px; margin-right: 6px; }
     .badge.florestal { background: #dcfce7; color: #166534; }
     .badge.geo       { background: #dbeafe; color: #1e40af; }
+    .badge.mecanica  { background: #fef3c7; color: #92400e; }
+    .badge.educacao  { background: #ede9fe; color: #5b21b6; }
+    .badge.ti        { background: #f1f5f9; color: #334155; }
     .btn-deletar { padding: 6px 14px; background: white; color: #dc2626; border: 1px solid #fecaca; border-radius: 6px; font-family: inherit; font-size: 0.75rem; font-weight: 600; cursor: pointer; flex-shrink: 0; }
     .btn-deletar:hover { background: #fee2e2; }
     .vazio { font-size: 0.875rem; color: #94a3b8; text-align: center; padding: 32px; }
@@ -160,8 +163,11 @@ $trabalhos = db()->query("
         <div class="form-grupo">
           <label>Categoria *</label>
           <select name="categoria">
-            <option value="geo">Geotecnologias / Topografia</option>
             <option value="florestal">Eng. Florestal</option>
+            <option value="geo">Geotecnologias / Topografia</option>
+            <option value="mecanica">Mecânica Geral</option>
+            <option value="educacao">Educação Física</option>
+            <option value="ti">Tecnologia da Informação</option>
           </select>
         </div>
         <div class="form-grupo">
@@ -207,7 +213,11 @@ $trabalhos = db()->query("
           <div class="titulo"><?= htmlspecialchars($t['titulo']) ?></div>
           <div class="meta">
             <span class="badge <?= $t['categoria'] ?>">
-              <?= $t['categoria'] === 'florestal' ? 'Eng. Florestal' : 'Geotecnologias' ?>
+              <?php
+                $labels = ['florestal'=>'Eng. Florestal','geo'=>'Geotecnologias',
+                           'mecanica'=>'Mecânica Geral','educacao'=>'Educação Física','ti'=>'T.I.'];
+                echo $labels[$t['categoria']] ?? $t['categoria'];
+              ?>
             </span>
             <?= htmlspecialchars($t['data_obra']) ?>
           </div>

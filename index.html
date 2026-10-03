@@ -9,8 +9,7 @@
     *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
 
     :root {
-      --green:  #16a34a;
-      --blue:   #0284c7;
+      --ativa: #16a34a;
       --text:   #1e293b;
       --muted:  #64748b;
       --border: #e2e8f0;
@@ -30,7 +29,7 @@
     /* HEADER */
     .header {
       text-align: center;
-      margin-bottom: 64px;
+      margin-bottom: 56px;
     }
 
     .nome {
@@ -40,116 +39,84 @@
       text-transform: uppercase;
     }
 
-    .cargo {
-      margin-top: 10px;
-      font-size: 1.23rem;
-      font-weight: 400;
-      letter-spacing: 4px;
-      text-transform: uppercase;
-      color: var(--muted);
-    }
-
     .divider {
       width: 40px;
       height: 2px;
-      background: linear-gradient(90deg, var(--green), var(--blue));
+      background: var(--ativa);
       margin: 18px auto 0;
       border-radius: 2px;
+      transition: background 0.5s ease, width 0.5s ease;
     }
 
-    /* AREAS */
-    .areas {
-      display: flex;
-      gap: 64px;
+    /* CAROUSEL */
+    .carousel-section {
       width: 100%;
-      max-width: 860px;
-      align-items: flex-start;
-      justify-content: center;
+      max-width: 900px;
+      margin-bottom: 48px;
+      position: relative;
     }
 
-    .area {
-      flex: 1;
-      min-width: 0;
-    }
-
-    .area-titulo {
+    .carousel-wrapper {
+      position: relative;
+      height: 80px;
       display: flex;
       align-items: center;
       justify-content: center;
-      gap: 8px;
-      font-size: 1.17rem;
-      font-weight: 700;
-      letter-spacing: 3px;
-      text-transform: uppercase;
-      text-align: center;
-      cursor: pointer;
-      user-select: none;
-      padding-bottom: 4px;
-      transition: opacity 0.2s;
-    }
-
-    .area-subtitulo {
-      font-size: 1.17rem;
-      font-weight: 700;
-      text-transform: uppercase;
-      letter-spacing: 3px;
-      color: var(--blue);
-      text-align: center;
-      margin-top: 2px;
-      margin-bottom: 4px;
-    }
-
-    .area-seta {
-      font-size: 0.825rem;
-      opacity: 0.5;
-      transition: transform 0.35s ease, opacity 0.2s;
-    }
-
-    #area-florestal .area-titulo,
-    #area-florestal .area-seta { color: var(--green); }
-
-    #area-geo .area-titulo,
-    #area-geo .area-seta      { color: var(--blue); }
-
-    /* LISTA DE ITENS — oculta por padrão */
-    .area-lista {
-      max-height: 0;
       overflow: hidden;
-      transition: max-height 0.45s cubic-bezier(0.4, 0, 0.2, 1);
     }
 
-    /* Revelada por hover no desktop */
-    @media (hover: hover) and (pointer: fine) {
-      .area:hover .area-lista {
-        max-height: 800px;
-      }
-      .area:hover .area-seta {
-        transform: rotate(180deg);
-        opacity: 1;
-      }
-      #area-florestal .area-titulo:hover { color: var(--green); }
-      #area-geo       .area-titulo:hover { color: var(--blue); }
+    .carousel-nav {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      background: none;
+      border: none;
+      font-size: 2.6rem;
+      color: var(--muted);
+      cursor: pointer;
+      z-index: 20;
+      padding: 0 8px;
+      line-height: 1;
+      opacity: 0.30;
+      transition: opacity 0.2s;
+      font-weight: 300;
+    }
+    .carousel-nav:hover { opacity: 0.75; }
+    .carousel-nav.prev { left: 0; }
+    .carousel-nav.next { right: 0; }
+
+    .carousel-track {
+      position: relative;
+      width: 100%;
+      height: 80px;
     }
 
-    /* Revelada por clique/toque (JS adiciona .ativo) */
-    .area.ativo .area-lista {
-      max-height: 800px;
+    .cat-item {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      font-weight: 700;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      cursor: pointer;
+      white-space: nowrap;
+      transition: transform 0.52s cubic-bezier(0.4, 0, 0.2, 1),
+                  opacity  0.52s ease,
+                  color    0.35s ease,
+                  font-size 0.52s ease;
+      user-select: none;
     }
 
-    .area.ativo .area-seta {
-      transform: rotate(180deg);
-      opacity: 1;
+    /* SERVICOS */
+    .area-servicos {
+      width: 100%;
+      max-width: 560px;
+      margin-bottom: 48px;
+      min-height: 0;
+      transition: opacity 0.25s ease;
     }
 
-    /* ITEMS */
-    .lista-inner {
-      padding-top: 20px;
-    }
-
-    .item {
-      border-bottom: 1px solid var(--border);
-    }
-
+    .item { border-bottom: 1px solid var(--border); }
     .item:first-child { border-top: 1px solid var(--border); }
 
     .item-titulo {
@@ -158,7 +125,7 @@
       align-items: center;
       padding: 14px 0;
       cursor: pointer;
-      font-size: 1.275rem;
+      font-size: 1rem;
       font-weight: 600;
       color: var(--text);
       user-select: none;
@@ -166,33 +133,26 @@
       gap: 12px;
     }
 
-    #area-florestal .item-titulo:hover { color: var(--green); }
-    #area-geo       .item-titulo:hover { color: var(--blue); }
-
     .item-seta {
       font-size: 0.825rem;
       color: #ccc;
       flex-shrink: 0;
-      transition: transform 0.25s, color 0.2s;
+      transition: transform 0.25s ease, color 0.2s;
     }
-
-    #area-florestal .item.aberto .item-seta { transform: rotate(180deg); color: var(--green); }
-    #area-geo       .item.aberto .item-seta { transform: rotate(180deg); color: var(--blue); }
 
     .item-texto {
       display: none;
       padding: 0 0 14px;
-      font-size: 1.23rem;
+      font-size: 0.9rem;
       font-weight: 300;
       color: var(--muted);
       line-height: 1.8;
     }
-
     .item.aberto .item-texto { display: block; }
 
-    /* ULTIMOS TRABALHOS */
+    /* TRABALHOS */
     .trabalhos-section {
-      margin-top: 80px;
+      margin-top: 24px;
       width: 100%;
       max-width: 860px;
     }
@@ -212,6 +172,16 @@
       grid-template-columns: repeat(auto-fit, minmax(300px, 400px));
       justify-content: center;
       gap: 24px;
+      transition: opacity 0.25s ease;
+    }
+
+    .trabalhos-vazio {
+      text-align: center;
+      font-size: 0.85rem;
+      color: var(--muted);
+      padding: 48px 0;
+      letter-spacing: 1px;
+      grid-column: 1 / -1;
     }
 
     .trabalho-card {
@@ -219,6 +189,12 @@
       border: 1px solid var(--border);
       border-radius: 8px;
       overflow: hidden;
+      animation: entrar 0.35s ease forwards;
+    }
+
+    @keyframes entrar {
+      from { opacity: 0; transform: translateY(10px); }
+      to   { opacity: 1; transform: translateY(0); }
     }
 
     .trabalho-card img {
@@ -240,9 +216,7 @@
       color: var(--muted);
     }
 
-    .trabalho-corpo {
-      padding: 16px 18px 20px;
-    }
+    .trabalho-corpo { padding: 16px 18px 20px; }
 
     .trabalho-data {
       font-size: 0.72rem;
@@ -308,8 +282,7 @@
     }
     .lightbox-fechar {
       position: absolute;
-      top: 18px;
-      right: 26px;
+      top: 18px; right: 26px;
       color: white;
       font-size: 2.2rem;
       cursor: pointer;
@@ -331,31 +304,11 @@
       text-decoration: none;
       transition: color 0.2s;
     }
-
     .whatsapp:hover { color: #22c55e; }
     .whatsapp svg { width: 16px; height: 16px; fill: currentColor; flex-shrink: 0; }
 
-    /* RESPONSIVE */
     @media (max-width: 620px) {
-      .areas {
-        flex-direction: column;
-        align-items: center;
-        gap: 40px;
-      }
-
-      .area {
-        width: 100%;
-        max-width: 360px;
-      }
-
-      .item-titulo {
-        justify-content: center;
-        text-align: center;
-      }
-
-      .item-texto {
-        text-align: center;
-      }
+      .carousel-wrapper { height: 64px; }
     }
   </style>
 </head>
@@ -363,107 +316,25 @@
 
   <header class="header">
     <h1 class="nome">Nilton Dobes Bakargi</h1>
-    <div class="divider"></div>
+    <div class="divider" id="divider"></div>
   </header>
 
-  <div class="areas">
-
-    <!-- ENG. FLORESTAL -->
-    <section class="area" id="area-florestal">
-      <p class="area-titulo" onclick="toggleArea('area-florestal')">
-        Eng. Florestal <span class="area-seta">&#9660;</span>
-      </p>
-      <div class="area-lista">
-        <div class="lista-inner">
-
-          <div class="item">
-            <div class="item-titulo" onclick="toggleItem(this)">
-              Invent&aacute;rio Florestal <span class="item-seta">&#9660;</span>
-            </div>
-            <div class="item-texto">Levantamento e identifica&ccedil;&atilde;o de esp&eacute;cies arb&oacute;reas urbanas e nativas, com emiss&atilde;o de laudo t&eacute;cnico e ART.</div>
-          </div>
-
-          <div class="item">
-            <div class="item-titulo" onclick="toggleItem(this)">
-              Recupera&ccedil;&atilde;o de &Aacute;reas Degradadas <span class="item-seta">&#9660;</span>
-            </div>
-            <div class="item-texto">Planejamento e execu&ccedil;&atilde;o de projetos de restaura&ccedil;&atilde;o ecol&oacute;gica em &aacute;reas de preserva&ccedil;&atilde;o permanente e reserva legal.</div>
-          </div>
-
-          <div class="item">
-            <div class="item-titulo" onclick="toggleItem(this)">
-              CAR &mdash; Cadastro Ambiental Rural <span class="item-seta">&#9660;</span>
-            </div>
-            <div class="item-texto">Elabora&ccedil;&atilde;o, regulariza&ccedil;&atilde;o e atualiza&ccedil;&atilde;o do Cadastro Ambiental Rural junto ao SICAR, com an&aacute;lise da propriedade e adequa&ccedil;&atilde;o &agrave; legisla&ccedil;&atilde;o do C&oacute;digo Florestal.</div>
-          </div>
-
-          <div class="item">
-            <div class="item-titulo" onclick="toggleItem(this)">
-              Defesas Ambientais <span class="item-seta">&#9660;</span>
-            </div>
-            <div class="item-texto">Assessoria t&eacute;cnica em defesas administrativas e jur&iacute;dicas: multas ambientais, TACs, inqu&eacute;ritos civis, laudos ambientais e demais exig&ecirc;ncias de &oacute;rg&atilde;os ambientais.</div>
-          </div>
-
-          <div class="item">
-            <div class="item-titulo" onclick="toggleItem(this)">
-              Plantio e Manejo de Mudas Nativas <span class="item-seta">&#9660;</span>
-            </div>
-            <div class="item-texto">Sele&ccedil;&atilde;o de esp&eacute;cies, plantio e acompanhamento t&eacute;cnico de mudas nativas para recomposi&ccedil;&atilde;o de vegeta&ccedil;&atilde;o.</div>
-          </div>
-
-          <div class="item">
-            <div class="item-titulo" onclick="toggleItem(this)">
-              Remo&ccedil;&atilde;o de &Aacute;rvores Perigosas <span class="item-seta">&#9660;</span>
-            </div>
-            <div class="item-texto">Avalia&ccedil;&atilde;o fitossanit&aacute;ria, emiss&atilde;o de laudo e obten&ccedil;&atilde;o de autoriza&ccedil;&atilde;o para remo&ccedil;&atilde;o segura de &aacute;rvores de risco.</div>
-          </div>
-
-        </div>
-      </div>
-    </section>
-
-    <!-- GEOTECNOLOGIAS -->
-    <section class="area" id="area-geo">
-      <p class="area-titulo" onclick="toggleArea('area-geo')">
-        Geotecnologias <span class="area-seta">&#9660;</span>
-      </p>
-      <p class="area-subtitulo">(Topografia)</p>
-      <div class="area-lista">
-        <div class="lista-inner">
-
-          <div class="item">
-            <div class="item-titulo" onclick="toggleItem(this)">
-              Georreferenciamento de Im&oacute;veis Rurais <span class="item-seta">&#9660;</span>
-            </div>
-            <div class="item-texto">Medi&ccedil;&atilde;o e certifica&ccedil;&atilde;o de propriedades rurais junto ao INCRA, conforme exig&ecirc;ncia legal para transfer&ecirc;ncia e financiamento de im&oacute;veis rurais.</div>
-          </div>
-
-          <div class="item">
-            <div class="item-titulo" onclick="toggleItem(this)">
-              Levantamento Topogr&aacute;fico e Planialtim&eacute;trico <span class="item-seta">&#9660;</span>
-            </div>
-            <div class="item-texto">Levantamento detalhado do terreno com representa&ccedil;&atilde;o de curvas de n&iacute;vel, declividades e elementos f&iacute;sicos, para projetos de engenharia e arquitetura.</div>
-          </div>
-
-          <div class="item">
-            <div class="item-titulo" onclick="toggleItem(this)">
-              Loca&ccedil;&atilde;o de Terrenos <span class="item-seta">&#9660;</span>
-            </div>
-            <div class="item-texto">Implanta&ccedil;&atilde;o de obras no terreno com base em projeto aprovado, garantindo a correta posi&ccedil;&atilde;o das constru&ccedil;&otilde;es conforme limites da propriedade.</div>
-          </div>
-
-          <div class="item">
-            <div class="item-titulo" onclick="toggleItem(this)">
-              Desmembramento e Remembramento <span class="item-seta">&#9660;</span>
-            </div>
-            <div class="item-texto">Divis&atilde;o ou unifica&ccedil;&atilde;o de &aacute;reas urbanas e rurais com elabora&ccedil;&atilde;o de memorial descritivo, planta t&eacute;cnica e registro em cart&oacute;rio.</div>
-          </div>
-
-        </div>
-      </div>
-    </section>
-
+  <div class="carousel-section">
+    <div class="carousel-wrapper" id="carousel-wrapper">
+      <button class="carousel-nav prev" onclick="rodar(-1)">&#8249;</button>
+      <div class="carousel-track" id="carousel-track"></div>
+      <button class="carousel-nav next" onclick="rodar(1)">&#8250;</button>
+    </div>
   </div>
+
+  <div class="area-servicos" id="area-servicos"></div>
+
+  <section class="trabalhos-section" id="trabalhos">
+    <h2 class="trabalhos-titulo">Últimos Trabalhos</h2>
+    <div class="trabalhos-grid" id="trabalhos-grid">
+      <p class="trabalhos-vazio">Nenhum trabalho nesta área ainda.</p>
+    </div>
+  </section>
 
   <a href="https://wa.me/5567981415533" target="_blank" class="whatsapp">
     <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
@@ -474,35 +345,156 @@
     <a href="admin/" style="font-size:0.65rem;letter-spacing:2px;color:#94a3b8;text-decoration:none;text-transform:uppercase;font-family:'Montserrat',sans-serif;">Admin</a>
   </footer>
 
-  <section class="trabalhos-section" id="trabalhos" style="display:none">
-    <h2 class="trabalhos-titulo">Últimos Trabalhos</h2>
-    <div class="trabalhos-grid" id="trabalhos-grid"></div>
-  </section>
-
   <div class="lightbox" id="lightbox" onclick="fecharLightbox()">
     <span class="lightbox-fechar" onclick="fecharLightbox()">&times;</span>
     <img id="lightbox-img" src="" alt="" onclick="event.stopPropagation()" />
   </div>
 
   <script>
-    // Carrega trabalhos do JSON
-    fetch('api/trabalhos.php')
-      .then(function(r){ return r.json(); })
-      .then(function(lista) {
-        if (!lista || lista.length === 0) return;
-        var grid    = document.getElementById('trabalhos-grid');
-        var secao   = document.getElementById('trabalhos');
-        var meses   = ['janeiro','fevereiro','março','abril','maio','junho','julho','agosto','setembro','outubro','novembro','dezembro'];
+    var CATEGORIAS = [
+      { id: 'mecanica',  label: 'Mec\u00e2nica Geral',          cor: '#d97706' },
+      { id: 'educacao',  label: 'Educa\u00e7\u00e3o F\u00edsica', cor: '#7c3aed' },
+      { id: 'florestal', label: 'Eng. Florestal',                cor: '#16a34a' },
+      { id: 'geo',       label: 'Geotecnologias',                cor: '#0284c7' },
+      { id: 'ti',        label: 'Tecnologia da Informa\u00e7\u00e3o', cor: '#475569' }
+    ];
+
+    var SERVICOS = {
+      florestal: [
+        { t: 'Invent\u00e1rio Florestal',
+          d: 'Levantamento e identifica\u00e7\u00e3o de esp\u00e9cies arb\u00f3reas urbanas e nativas, com emiss\u00e3o de laudo t\u00e9cnico e ART.' },
+        { t: 'Recupera\u00e7\u00e3o de \u00c1reas Degradadas',
+          d: 'Planejamento e execu\u00e7\u00e3o de projetos de restaura\u00e7\u00e3o ecol\u00f3gica em \u00e1reas de preserva\u00e7\u00e3o permanente e reserva legal.' },
+        { t: 'CAR \u2014 Cadastro Ambiental Rural',
+          d: 'Elabora\u00e7\u00e3o, regulariza\u00e7\u00e3o e atualiza\u00e7\u00e3o do Cadastro Ambiental Rural junto ao SICAR, com an\u00e1lise da propriedade e adequa\u00e7\u00e3o \u00e0 legisla\u00e7\u00e3o do C\u00f3digo Florestal.' },
+        { t: 'Defesas Ambientais',
+          d: 'Assessoria t\u00e9cnica em defesas administrativas e jur\u00eddicas: multas ambientais, TACs, inqu\u00e9ritos civis, laudos ambientais e demais exig\u00eancias de \u00f3rg\u00e3os ambientais.' },
+        { t: 'Plantio e Manejo de Mudas Nativas',
+          d: 'Sele\u00e7\u00e3o de esp\u00e9cies, plantio e acompanhamento t\u00e9cnico de mudas nativas para recomposi\u00e7\u00e3o de vegeta\u00e7\u00e3o.' },
+        { t: 'Remo\u00e7\u00e3o de \u00c1rvores Perigosas',
+          d: 'Avalia\u00e7\u00e3o fitossanit\u00e1ria, emiss\u00e3o de laudo e obten\u00e7\u00e3o de autoriza\u00e7\u00e3o para remo\u00e7\u00e3o segura de \u00e1rvores de risco.' }
+      ],
+      geo: [
+        { t: 'Georreferenciamento de Im\u00f3veis Rurais',
+          d: 'Medi\u00e7\u00e3o e certifica\u00e7\u00e3o de propriedades rurais junto ao INCRA, conforme exig\u00eancia legal para transfer\u00eancia e financiamento de im\u00f3veis rurais.' },
+        { t: 'Levantamento Topogr\u00e1fico e Planialtim\u00e9trico',
+          d: 'Levantamento detalhado do terreno com representa\u00e7\u00e3o de curvas de n\u00edvel, declividades e elementos f\u00edsicos, para projetos de engenharia e arquitetura.' },
+        { t: 'Loca\u00e7\u00e3o de Terrenos',
+          d: 'Implanta\u00e7\u00e3o de obras no terreno com base em projeto aprovado, garantindo a correta posi\u00e7\u00e3o das constru\u00e7\u00f5es conforme limites da propriedade.' },
+        { t: 'Desmembramento e Remembramento',
+          d: 'Divis\u00e3o ou unifica\u00e7\u00e3o de \u00e1reas urbanas e rurais com elabora\u00e7\u00e3o de memorial descritivo, planta t\u00e9cnica e registro em cart\u00f3rio.' }
+      ],
+      mecanica: [],
+      educacao: [],
+      ti: []
+    };
+
+    /* Posições no carrossel: índice 0=mais esq, 4=mais dir, 2=centro */
+    var OFFSETS = [
+      { x: -340, scale: 0.46, opacity: 0.15, fs: '0.60rem' },
+      { x: -175, scale: 0.70, opacity: 0.48, fs: '0.80rem' },
+      { x:    0, scale: 1.00, opacity: 1.00, fs: '1.10rem' },
+      { x:  175, scale: 0.70, opacity: 0.48, fs: '0.80rem' },
+      { x:  340, scale: 0.46, opacity: 0.15, fs: '0.60rem' }
+    ];
+
+    var ativo = 2; /* começa em Eng. Florestal */
+    var todosTrabalhos = [];
+
+    function renderCarrossel() {
+      var track = document.getElementById('carousel-track');
+      track.innerHTML = '';
+
+      CATEGORIAS.forEach(function(cat, i) {
+        var offset = i - ativo;
+        var posIdx = offset + 2;
+        var el = document.createElement('div');
+        el.className = 'cat-item';
+        el.textContent = cat.label;
+        el.onclick = (function(idx) { return function() { irPara(idx); }; })(i);
+
+        if (posIdx < 0 || posIdx > 4) {
+          el.style.opacity = '0';
+          el.style.pointerEvents = 'none';
+          el.style.transform = 'translate(-50%, -50%) translateX(' + (offset > 0 ? 600 : -600) + 'px) scale(0.3)';
+        } else {
+          var p = OFFSETS[posIdx];
+          el.style.opacity    = p.opacity;
+          el.style.fontSize   = p.fs;
+          el.style.color      = (i === ativo) ? cat.cor : 'var(--muted)';
+          el.style.zIndex     = (i === ativo) ? 10 : (5 - Math.abs(offset));
+          el.style.transform  = 'translate(-50%, -50%) translateX(' + p.x + 'px) scale(' + p.scale + ')';
+          el.style.pointerEvents = (Math.abs(offset) <= 2) ? 'auto' : 'none';
+        }
+
+        track.appendChild(el);
+      });
+
+      /* atualiza cor do divider */
+      document.getElementById('divider').style.background = CATEGORIAS[ativo].cor;
+      document.documentElement.style.setProperty('--ativa', CATEGORIAS[ativo].cor);
+    }
+
+    function renderServicos() {
+      var container = document.getElementById('area-servicos');
+      var cat = CATEGORIAS[ativo];
+      var lista = SERVICOS[cat.id] || [];
+
+      if (!lista.length) { container.innerHTML = ''; return; }
+
+      var html = '';
+      lista.forEach(function(s) {
+        html += '<div class="item">' +
+          '<div class="item-titulo" onclick="toggleItem(this)">' +
+            s.t +
+            '<span class="item-seta">&#9660;</span>' +
+          '</div>' +
+          '<div class="item-texto">' + s.d + '</div>' +
+        '</div>';
+      });
+      container.innerHTML = html;
+
+      /* cor de hover dinâmica */
+      container.querySelectorAll('.item-titulo').forEach(function(el) {
+        el.addEventListener('mouseenter', function() { this.style.color = cat.cor; });
+        el.addEventListener('mouseleave', function() {
+          if (!this.parentElement.classList.contains('aberto')) this.style.color = '';
+        });
+      });
+    }
+
+    function filtrarTrabalhos() {
+      var cat = CATEGORIAS[ativo];
+      var lista = todosTrabalhos.filter(function(t) { return t.categoria === cat.id; });
+      renderCards(lista);
+    }
+
+    var MESES = ['janeiro','fevereiro','março','abril','maio','junho',
+                 'julho','agosto','setembro','outubro','novembro','dezembro'];
+
+    function renderCards(lista) {
+      var grid = document.getElementById('trabalhos-grid');
+      grid.style.opacity = '0';
+
+      setTimeout(function() {
+        grid.innerHTML = '';
+
+        if (!lista || lista.length === 0) {
+          grid.innerHTML = '<p class="trabalhos-vazio">Nenhum trabalho nesta \u00e1rea ainda.</p>';
+          grid.style.opacity = '1';
+          return;
+        }
 
         lista.forEach(function(t) {
-          var partes = t.data ? t.data.split('-') : [];
+          var partes  = t.data ? t.data.split('-') : [];
           var dataStr = '';
           if (partes.length === 3) {
-            dataStr = parseInt(partes[2]) + ' de ' + meses[parseInt(partes[1]) - 1] + ' de ' + partes[0];
+            dataStr = parseInt(partes[2]) + ' de ' + MESES[parseInt(partes[1]) - 1] + ' de ' + partes[0];
           }
 
           var imgHtml = t.imagem
-            ? '<img src="' + t.imagem + '" alt="' + t.titulo + '" loading="lazy" onclick="abrirLightbox(\'' + t.imagem + '\',\'' + t.titulo.replace(/'/g,"\\'") + '\')" />'
+            ? '<img src="' + t.imagem + '" alt="' + t.titulo + '" loading="lazy" onclick="abrirLightbox(\'' +
+              t.imagem + '\',\'' + t.titulo.replace(/'/g, "\\'") + '\')" />'
             : '<div class="trabalho-sem-img">sem imagem</div>';
 
           var metaHtml = '';
@@ -515,20 +507,50 @@
 
           var card = document.createElement('div');
           card.className = 'trabalho-card';
-          card.innerHTML =
-            imgHtml +
+          card.innerHTML = imgHtml +
             '<div class="trabalho-corpo">' +
-              '<div class="trabalho-data">' + dataStr + '</div>' +
-              '<div class="trabalho-nome">' + t.titulo + '</div>' +
-              '<div class="trabalho-desc">' + t.descricao + '</div>' +
+              '<div class="trabalho-data">'  + dataStr   + '</div>' +
+              '<div class="trabalho-nome">'  + t.titulo  + '</div>' +
+              '<div class="trabalho-desc">'  + t.descricao + '</div>' +
               metaHtml +
             '</div>';
           grid.appendChild(card);
         });
 
-        secao.style.display = 'block';
-      })
-      .catch(function(){});
+        grid.style.opacity = '1';
+      }, 200);
+    }
+
+    function irPara(idx) {
+      if (idx === ativo) return;
+      ativo = idx;
+      renderCarrossel();
+      renderServicos();
+      filtrarTrabalhos();
+    }
+
+    function rodar(dir) {
+      ativo = (ativo + dir + CATEGORIAS.length) % CATEGORIAS.length;
+      renderCarrossel();
+      renderServicos();
+      filtrarTrabalhos();
+    }
+
+    function toggleItem(el) {
+      var item = el.parentElement;
+      item.classList.toggle('aberto');
+      var cor = CATEGORIAS[ativo].cor;
+      var seta = el.querySelector('.item-seta');
+      if (item.classList.contains('aberto')) {
+        seta.style.transform = 'rotate(180deg)';
+        seta.style.color = cor;
+        el.style.color   = cor;
+      } else {
+        seta.style.transform = '';
+        seta.style.color = '';
+        el.style.color   = '';
+      }
+    }
 
     function abrirLightbox(src, alt) {
       document.getElementById('lightbox-img').src = src;
@@ -542,17 +564,33 @@
       document.body.style.overflow = '';
     }
 
+    /* Teclado */
     document.addEventListener('keydown', function(e) {
-      if (e.key === 'Escape') fecharLightbox();
+      if (e.key === 'Escape')      fecharLightbox();
+      if (e.key === 'ArrowLeft')   rodar(-1);
+      if (e.key === 'ArrowRight')  rodar(1);
     });
 
-    function toggleArea(id) {
-      document.getElementById(id).classList.toggle('ativo');
-    }
+    /* Swipe mobile */
+    var touchX = 0;
+    var wrapper = document.getElementById('carousel-wrapper');
+    wrapper.addEventListener('touchstart', function(e) { touchX = e.touches[0].clientX; }, { passive: true });
+    wrapper.addEventListener('touchend',   function(e) {
+      var dx = e.changedTouches[0].clientX - touchX;
+      if (Math.abs(dx) > 48) rodar(dx < 0 ? 1 : -1);
+    }, { passive: true });
 
-    function toggleItem(el) {
-      el.parentElement.classList.toggle('aberto');
-    }
+    /* Init */
+    renderCarrossel();
+    renderServicos();
+
+    fetch('api/trabalhos.php')
+      .then(function(r) { return r.json(); })
+      .then(function(lista) {
+        todosTrabalhos = lista || [];
+        filtrarTrabalhos();
+      })
+      .catch(function() {});
   </script>
 
 </body>

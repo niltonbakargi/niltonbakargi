@@ -12,8 +12,8 @@ $descricao  = trim($_POST['descricao']  ?? '');
 $data_obra  = trim($_POST['data']       ?? '');
 $local_obra = trim($_POST['local_obra'] ?? '');
 $cliente    = trim($_POST['cliente']    ?? '');
-$categoria  = in_array($_POST['categoria'] ?? '', ['florestal', 'geo'])
-              ? $_POST['categoria'] : 'geo';
+$categoria  = in_array($_POST['categoria'] ?? '', ['florestal', 'geo', 'mecanica', 'educacao', 'ti'])
+              ? $_POST['categoria'] : 'florestal';
 
 if (!$titulo || !$descricao || !$data_obra) {
     header('Location: index.php?erro=campos');
