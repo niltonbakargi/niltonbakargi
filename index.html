@@ -352,8 +352,8 @@
 
   <script>
     var CATEGORIAS = [
-      { id: 'mecanica',  label: 'Mec\u00e2nica Geral',          cor: '#d97706' },
       { id: 'educacao',  label: 'Educa\u00e7\u00e3o F\u00edsica', cor: '#7c3aed' },
+      { id: 'mecanica',  label: 'Mec\u00e2nica Geral',          cor: '#d97706' },
       { id: 'florestal', label: 'Eng. Florestal',                cor: '#16a34a' },
       { id: 'geo',       label: 'Geotecnologias',                cor: '#0284c7' },
       { id: 'ti',        label: 'Tecnologia da Informa\u00e7\u00e3o', cor: '#475569' }
@@ -384,9 +384,32 @@
         { t: 'Desmembramento e Remembramento',
           d: 'Divis\u00e3o ou unifica\u00e7\u00e3o de \u00e1reas urbanas e rurais com elabora\u00e7\u00e3o de memorial descritivo, planta t\u00e9cnica e registro em cart\u00f3rio.' }
       ],
-      mecanica: [],
-      educacao: [],
-      ti: []
+      mecanica: [
+        { t: 'Tornearia',
+          d: 'Usinagem de pe\u00e7as em torno mec\u00e2nico com precis\u00e3o dimensional, atendendo produ\u00e7\u00e3o unit\u00e1ria e em s\u00e9rie para diferentes materiais met\u00e1licos.' },
+        { t: 'Restaura\u00e7\u00f5es',
+          d: 'Recupera\u00e7\u00e3o de pe\u00e7as e equipamentos desgastados, devolvendo as dimens\u00f5es e propriedades originais com acabamento de qualidade.' },
+        { t: 'Reformas',
+          d: 'Adapta\u00e7\u00e3o e moderniza\u00e7\u00e3o de m\u00e1quinas, estruturas e equipamentos, aumentando vida \u00fatil e desempenho operacional.' },
+        { t: 'Soldas (MIG / TIG / MMA)',
+          d: 'Execu\u00e7\u00e3o de solda MIG, TIG e eletrodo revestido (MMA) em a\u00e7o carbono, inox e alum\u00ednio, com controle de distorção e acabamento.' }
+      ],
+      educacao: [
+        { t: 'Especialista em Gest\u00e3o Escolar',
+          d: 'Atua\u00e7\u00e3o em gest\u00e3o escolar e coordena\u00e7\u00e3o pedag\u00f3gica, com foco na organiza\u00e7\u00e3o institucional, acompanhamento do processo de ensino-aprendizagem e articula\u00e7\u00e3o entre equipe pedag\u00f3gica, professores e comunidade escolar.' },
+        { t: 'Professor \u2014 Funcion\u00e1rio P\u00fablico Municipal',
+          d: 'Professor efetivo do munic\u00edpio, atualmente cedido \u00e0 Secretaria de Estado da Educa\u00e7\u00e3o (SED), atuando em rede estadual conforme termo de ces\u00e3o vigente.' },
+        { t: 'Professor \u2014 Funcion\u00e1rio P\u00fablico Estadual',
+          d: 'Professor efetivo da rede estadual, atualmente em exerc\u00edcio na unidade escolar. As demandas de infraestrutura e manuten\u00e7\u00e3o predial ou de equipamentos s\u00e3o encaminhadas \u00e0 Diretoria-Geral de Infraestrutura, Administra\u00e7\u00e3o e Apoio Escolar (DGIAPE).' }
+      ],
+      ti: [
+        { t: 'Desenvolvimento de Apps Mobile',
+          d: 'Cria\u00e7\u00e3o de aplicativos m\u00f3veis para Android e iOS, com foco em usabilidade, performance e integra\u00e7\u00e3o com APIs e servi\u00e7os externos.' },
+        { t: 'Aplicativos Web',
+          d: 'Desenvolvimento de sistemas e aplica\u00e7\u00f5es web responsivos, do front-end ao back-end, com solu\u00e7\u00f5es sob medida para empresas e profissionais.' },
+        { t: 'Agentes de Intelig\u00eancia Artificial',
+          d: 'Desenvolvimento de agentes de IA aut\u00f4nomos e assistentes inteligentes, utilizando modelos de linguagem e automa\u00e7\u00e3o para otimizar processos e tomada de decis\u00e3o.' }
+      ]
     };
 
     /* Posições no carrossel: índice 0=mais esq, 4=mais dir, 2=centro */
