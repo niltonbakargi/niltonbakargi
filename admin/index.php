@@ -162,12 +162,18 @@ $trabalhos = db()->query("
       <div class="form-linha">
         <div class="form-grupo">
           <label>Categoria *</label>
-          <select name="categoria">
+          <select name="categoria" id="sel-categoria" onchange="atualizarTemas()">
             <option value="florestal">Eng. Florestal</option>
             <option value="geo">Geotecnologias / Topografia</option>
             <option value="mecanica">Mecânica Geral</option>
             <option value="educacao">Educação Física</option>
             <option value="ti">Tecnologia da Informação</option>
+          </select>
+        </div>
+        <div class="form-grupo">
+          <label>Tema</label>
+          <select name="tema" id="sel-tema">
+            <option value="">— selecione um tema —</option>
           </select>
         </div>
         <div class="form-grupo">
@@ -219,6 +225,10 @@ $trabalhos = db()->query("
                 echo $labels[$t['categoria']] ?? $t['categoria'];
               ?>
             </span>
+            <?php if (!empty($t['tema'])): ?>
+              <span style="color:#475569;font-size:0.75rem;"><?= htmlspecialchars($t['tema']) ?></span>
+              &mdash;
+            <?php endif; ?>
             <?= htmlspecialchars($t['data_obra']) ?>
           </div>
           <div class="desc"><?= htmlspecialchars($t['descricao']) ?></div>
@@ -232,5 +242,27 @@ $trabalhos = db()->query("
   <?php endif; ?>
 
 </div>
+
+<script>
+var TEMAS = {
+  florestal: ['Inventário Florestal','Recuperação de Áreas Degradadas','CAR — Cadastro Ambiental Rural','Defesas Ambientais','Plantio e Manejo de Mudas Nativas','Remoção de Árvores Perigosas'],
+  geo:       ['Georreferenciamento de Imóveis Rurais','Levantamento Topográfico e Planialtimétrico','Locação de Terrenos','Desmembramento e Remembramento'],
+  mecanica:  ['Tornearia','Restaurações','Reformas','Soldas (MIG / TIG / MMA)'],
+  educacao:  ['Especialista em Gestão Escolar','Professor — Funcionário Público Municipal','Professor — Funcionário Público Estadual'],
+  ti:        ['Desenvolvimento de Apps Mobile','Aplicativos Web','Agentes de Inteligência Artificial']
+};
+function atualizarTemas() {
+  var cat  = document.getElementById('sel-categoria').value;
+  var sel  = document.getElementById('sel-tema');
+  var list = TEMAS[cat] || [];
+  sel.innerHTML = '<option value="">— selecione um tema —</option>';
+  list.forEach(function(t) {
+    var o = document.createElement('option');
+    o.value = t; o.textContent = t;
+    sel.appendChild(o);
+  });
+}
+atualizarTemas();
+</script>
 </body>
 </html>

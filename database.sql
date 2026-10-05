@@ -27,7 +27,8 @@ INSERT INTO `admin` (`usuario`, `senha`) VALUES
 CREATE TABLE IF NOT EXISTS `trabalhos` (
   `id`          INT UNSIGNED    NOT NULL AUTO_INCREMENT,
   `titulo`      VARCHAR(150)    NOT NULL,
-  `categoria`   ENUM('florestal','geo') NOT NULL,
+  `categoria`   ENUM('florestal','geo','mecanica','educacao','ti') NOT NULL,
+  `tema`        VARCHAR(100)    NULL     COMMENT 'sub-tema dentro da categoria',
   `descricao`   TEXT            NOT NULL,
   `data_obra`   DATE            NULL     COMMENT 'data em que o serviço foi realizado',
   `local_obra`  VARCHAR(255)    NULL     COMMENT 'cidade ou local do serviço',
@@ -41,8 +42,10 @@ CREATE TABLE IF NOT EXISTS `trabalhos` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 
--- Migracao (rodar no phpMyAdmin se o banco ja existir):
+-- Migracoes (rodar no phpMyAdmin se o banco ja existir):
 -- ALTER TABLE `trabalhos` ADD COLUMN `local_obra` VARCHAR(255) NULL AFTER `data_obra`, ADD COLUMN `cliente` VARCHAR(255) NULL AFTER `local_obra`;
+-- ALTER TABLE `trabalhos` MODIFY COLUMN `categoria` ENUM('florestal','geo','mecanica','educacao','ti') NOT NULL;
+-- ALTER TABLE `trabalhos` ADD COLUMN `tema` VARCHAR(100) NULL AFTER `categoria`;
 
 -- 3. TABELA DE FOTOS (múltiplas por trabalho)
 -- --------------------------------------------------------
