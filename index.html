@@ -199,10 +199,7 @@
 
     .trabalho-card img {
       width: 100%;
-      height: 260px;
-      object-fit: cover;
       display: block;
-      cursor: zoom-in;
     }
 
     .trabalho-sem-img {
@@ -236,7 +233,7 @@
     }
 
     .trabalho-desc {
-      font-size: 0.875rem;
+      font-size: 0.44rem;
       font-weight: 300;
       color: var(--muted);
       line-height: 1.7;
@@ -330,7 +327,7 @@
   <div class="area-servicos" id="area-servicos"></div>
 
   <section class="trabalhos-section" id="trabalhos">
-    <h2 class="trabalhos-titulo">Últimos Trabalhos</h2>
+    <h2 class="trabalhos-titulo">Alguns de Nossos Trabalhos</h2>
     <div class="trabalhos-grid" id="trabalhos-grid">
       <p class="trabalhos-vazio">Nenhum trabalho nesta área ainda.</p>
     </div>
@@ -516,8 +513,7 @@
           }
 
           var imgHtml = t.imagem
-            ? '<img src="' + t.imagem + '" alt="' + t.titulo + '" loading="lazy" onclick="abrirLightbox(\'' +
-              t.imagem + '\',\'' + t.titulo.replace(/'/g, "\\'") + '\')" />'
+            ? '<img src="' + t.imagem + '" alt="' + t.titulo + '" loading="lazy" />'
             : '<div class="trabalho-sem-img">sem imagem</div>';
 
           var metaHtml = '';
