@@ -258,37 +258,6 @@
       gap: 4px;
     }
 
-    /* LIGHTBOX */
-    .lightbox {
-      display: none;
-      position: fixed;
-      inset: 0;
-      background: rgba(0,0,0,0.88);
-      z-index: 1000;
-      align-items: center;
-      justify-content: center;
-      cursor: zoom-out;
-    }
-    .lightbox.ativo { display: flex; }
-    .lightbox img {
-      max-width: 92vw;
-      max-height: 92vh;
-      object-fit: contain;
-      border-radius: 4px;
-      cursor: default;
-    }
-    .lightbox-fechar {
-      position: absolute;
-      top: 18px; right: 26px;
-      color: white;
-      font-size: 2.2rem;
-      cursor: pointer;
-      opacity: 0.7;
-      line-height: 1;
-      user-select: none;
-    }
-    .lightbox-fechar:hover { opacity: 1; }
-
     /* WHATSAPP */
     .whatsapp {
       margin-top: 64px;
@@ -341,11 +310,6 @@
   <footer style="margin-top:16px;padding-bottom:8px;">
     <a href="admin/" style="font-size:0.65rem;letter-spacing:2px;color:#94a3b8;text-decoration:none;text-transform:uppercase;font-family:'Montserrat',sans-serif;">Admin</a>
   </footer>
-
-  <div class="lightbox" id="lightbox" onclick="fecharLightbox()">
-    <span class="lightbox-fechar" onclick="fecharLightbox()">&times;</span>
-    <img id="lightbox-img" src="" alt="" onclick="event.stopPropagation()" />
-  </div>
 
   <script>
     var CATEGORIAS = [
@@ -571,21 +535,8 @@
       }
     }
 
-    function abrirLightbox(src, alt) {
-      document.getElementById('lightbox-img').src = src;
-      document.getElementById('lightbox-img').alt = alt;
-      document.getElementById('lightbox').classList.add('ativo');
-      document.body.style.overflow = 'hidden';
-    }
-
-    function fecharLightbox() {
-      document.getElementById('lightbox').classList.remove('ativo');
-      document.body.style.overflow = '';
-    }
-
     /* Teclado */
     document.addEventListener('keydown', function(e) {
-      if (e.key === 'Escape')      fecharLightbox();
       if (e.key === 'ArrowLeft')   rodar(-1);
       if (e.key === 'ArrowRight')  rodar(1);
     });
